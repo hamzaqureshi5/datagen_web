@@ -21,8 +21,8 @@ from datagenApp import views
 
 urlpatterns = [
     #    path("admin/", admin.site.urls),
-    path("", views.login, name="login"),
-    path("login/", views.login, name="login"),
+    path("", views.user_login, name="login"),
+    path("login/", views.user_login, name="login"),
     path("document/", views.document, name="document"),
     path("keys/", views.keys, name="keys"),
     path("electrical/", views.electrical, name="electrical"),

@@ -1,51 +1,32 @@
-from django.shortcuts import render
-
-
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
-# from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 
-# from .forms import UserRegisterForm
-from django.core.mail import send_mail
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import get_template
-from django.template import Context
 from .models import TextFile
+import json
 
-################ login forms###################################################
-# def Login(request):
-#     if request.method == "POST":
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
+        user = authenticate(request, username=username, password=password)
+        
+        if user is not None:
+            login(request, user)
+            messages.success(request, "You have been successfully logged in.")
+            return redirect('document')
+        else:
+            messages.error(request, "Invalid username or password.")
+            return redirect('login')  # Replace 'login' with the name of your login page URL pattern
+    
+    return render(request, 'datagenApp/login.html')  # Replace 'login.html' with the name of your login template
 
-#         # AuthenticationForm_can_also_be_used__
 
-#         username = request.POST["username"]
-#         password = request.POST["password"]
-#         user = authenticate(request, username=username, password=password)
-#         if user is not None:
-#             form = login(request, user)
-#             messages.success(request, f" welcome {username} !!")
-#             return redirect("index")
-#         else:
-#             messages.info(request, f"account done not exit plz sign in")
-#     form = AuthenticationForm()
-#     return render(request, "user/login.html", {"form": form, "title": "log in"})
-
-
-def login(request):
-    return render(request, "datagenApp/login.html")
-
-# def upload_text_file(request):
-#     if request.method == 'POST' and request.FILES.get('file'):
-#         uploaded_file = request.FILES['file']
-#         text_file = TextFile(file=uploaded_file)
-#         text_file.file_path = uploaded_file.name
-#         text_file.save()
-#         return redirect('upload_success')
-#     return render(request, 'upload_text_file.html')
-
+@login_required
 def document(request):
     context = {'result':"Sucessfully uploaded!"}
     print("--------------------->This message will be printed in the console or terminal where Django server is running.")
@@ -59,18 +40,23 @@ def document(request):
 
     return render(request, "datagenApp/document.html", context)
 
+
+@login_required
 def keys(request):
     return render(request, "datagenApp/keys.html")
 
 
+@login_required
 def electrical(request):
     return render(request, "datagenApp/electrical.html")
 
 
+@login_required
 def graphical(request):
     return render(request, "datagenApp/graphical.html")
 
 
+@login_required
 def preview(request):
     return render(request, "datagenApp/preview.html")
 

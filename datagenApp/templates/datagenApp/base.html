@@ -27,7 +27,7 @@
         <div class="container-fluid ">
             <div>
                 <img src="{% static 'images/favicon.ico' %}" alt="Logo_Here" class="img-fluid" width="30"
-                    height="24" /><a class="navbar-brand" href="#"></a>
+                    height="24" /><a class="navbar-brand" href="#">Secure Tech Cards</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +50,7 @@
 
             <div class="left_portion_nav">
                 <img src="{% static 'images/user.png' %}" alt="" class="img-fluid" width="30" height="24" /><span
-                    class="align-middle me-3">Username</span>
+                    class="align-middle me-3">{{ user_detail }}</span>
                 <button class="btn btn-outline-success" type="submit">Logout</button>
             </div>
 
