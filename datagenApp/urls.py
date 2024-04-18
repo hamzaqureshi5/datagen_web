@@ -20,11 +20,12 @@ from django.urls import path
 from datagenApp import views
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    #    path("admin/", admin.site.urls),
     path("", views.login, name="login"),
-    path("document", views.document, name="document"),
-    path("keys", views.keys, name="keys"),
-    path("electrical", views.electrical, name="electrical"),
-    path("graphical", views.graphical, name="graphical"),
-    path("preview", views.preview, name="preview"),
+    path("login/", views.login, name="login"),
+    path("document/", views.document, name="document"),
+    path("keys/", views.keys, name="keys"),
+    path("electrical/", views.electrical, name="electrical"),
+    path("graphical/", views.graphical, name="graphical"),
+    path("preview/", views.preview, name="preview"),
 ]
