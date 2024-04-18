@@ -132,3 +132,10 @@ button:focus {
   color: white;
 }
 /* Base Start End */
+
+
+.tab {
+  position: relative;
+  text-align: center;
+  margin: auto;
+}

@@ -13,7 +13,7 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import get_template
 from django.template import Context
-
+from .models import TextFile
 
 ################ login forms###################################################
 # def Login(request):
@@ -37,6 +37,27 @@ from django.template import Context
 def login(request):
     return render(request, "datagenApp/login.html")
 
+# def upload_text_file(request):
+#     if request.method == 'POST' and request.FILES.get('file'):
+#         uploaded_file = request.FILES['file']
+#         text_file = TextFile(file=uploaded_file)
+#         text_file.file_path = uploaded_file.name
+#         text_file.save()
+#         return redirect('upload_success')
+#     return render(request, 'upload_text_file.html')
+
+def document(request):
+    context = {'result':"Sucessfully uploaded!"}
+    print("--------------------->This message will be printed in the console or terminal where Django server is running.")
+
+    if request.method == 'POST' and request.FILES.get('file'):
+        uploaded_file = request.FILES['file']
+        text_file = TextFile(file=uploaded_file)
+        text_file.file_path = uploaded_file.name
+        text_file.save()
+    context = {'result':"Error loading file!"}
+
+    return render(request, "datagenApp/document.html", context)
 
 def keys(request):
     return render(request, "datagenApp/keys.html")
@@ -54,5 +75,3 @@ def preview(request):
     return render(request, "datagenApp/preview.html")
 
 
-def document(request):
-    return render(request, "datagenApp/document.html")
