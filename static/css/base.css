@@ -1,0 +1,28 @@
+button:focus {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.btn_icons {
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+}
+
+.btn_icons:hover {
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+}
+
+.btn_icons:focus {
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+}
+
+.btn_icons:active {
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+}
