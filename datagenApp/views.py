@@ -1,5 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+from django.contrib.auth import logout
+from django.shortcuts import redirect
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
@@ -29,12 +33,6 @@ def user_login(request):
     return render(
         request, "datagenApp/login.html"
     )  # Replace 'login.html' with the name of your login template
-
-
-from django.http import HttpResponseRedirect
-from django.urls import reverse
-from django.contrib.auth import logout
-from django.shortcuts import redirect
 
 
 def logout_view(request):
@@ -80,3 +78,8 @@ def graphical(request):
 @login_required
 def preview(request):
     return render(request, "datagenApp/preview.html")
+
+
+@login_required
+def generate(request):
+    return render(request, "datagenApp/generate.html")

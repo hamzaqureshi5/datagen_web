@@ -1,3 +1,22 @@
-{% extends 'datagenApp/base.html' %} {% load static %} {% block content %}
-<h3>Preview</h3>
+{% extends 'datagenApp/base.html' %}
+{% load static %}
+{% block title %}
+Data Generator
+
+{% endblock title %}
+
+{% block content %}
+
+<!-- One "tab" for each step in the form: -->
+<div class="tab mt-5">
+    <div
+        class="left_portion col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 shadow bg-body-tertiary rounded mx-auto p-5 mb-5 mt-5">
+        <h3 class="text-center">Data Preview Parameter Selection</h3>
+
+    </div>
+
+    <a class="btn btn-secondary btn-sm" href="{% url 'graphical' %}">Back</a>
+    <a class="btn btn-primary btn-sm" href="{% url 'generate' %}">Next</a>
+</div>
+
 {% endblock content %}

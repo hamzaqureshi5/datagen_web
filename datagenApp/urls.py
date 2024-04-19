@@ -29,4 +29,5 @@ urlpatterns = [
     path("electrical/", views.electrical, name="electrical"),
     path("graphical/", views.graphical, name="graphical"),
     path("preview/", views.preview, name="preview"),
+    path("generate/", views.generate, name="generate"),
 ]
