@@ -28,6 +28,14 @@ index
             <button type="submit" class="btn btn-primary " name="login">Login </button>
         </div>
     </form>
+    {% if messages %}
+    {% for message in messages %}
+    <div class="{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
 </div>
 <!---Login Page end-->
 {% endblock body %}{% endblock content %}
