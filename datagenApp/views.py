@@ -17,12 +17,16 @@ def user_login(request):
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
+        remember_me = request.POST.get("remember_me")
+        print("--------------------->", remember_me)
 
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
             login(request, user)
             messages.success(request, "You have been successfully logged in.")
+            if remember_me is not None:
+                request.session.set_expiry(604800)
             return redirect("document")
         else:
             messages.error(request, "Invalid username or password.")
