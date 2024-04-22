@@ -1,25 +1,194 @@
-{% extends 'datagenApp/base.html' %}
-{% load static %}
-{% block title %}
-Data Generator
-
-{% endblock title %}
-
-{% block content %}
+{% extends 'datagenApp/base.html' %} {% load static %} {% block title %} Data
+Generator {% endblock title %} {% block content %}
 
 <!-- One "tab" for each step in the form: -->
 <div class="tab mt-5">
   <div
-    class="left_portion col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 shadow bg-body-tertiary rounded mx-auto p-5 mb-5 mt-5">
-    <h3 class="text-center">Secure keys Configurations</h3>
-
+    class="left_portion col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 shadow bg-body-tertiary rounded mx-auto p-5 mb-5 mt-5 text-left">
+    <form action="#">
+      <div class="row">
+        <div class="row1">
+          <!---row1 Transport key-->
+          <label for="vendor text-left"> Transport Key: </label>
+          <div class="transportKey d-flex">
+            <input type="text" class="form-control form-control-sm" id="inputfile" name="k4_key_text" />
+            <button type="button" class="btn btn-dark btn-sm mx-1" name="k4_key_fetch">
+              Fatch
+            </button>
+            <button type="button" class="btn btn-dark btn-sm mx-1" name="k4_key_auto">
+              Auto
+            </button>
+          </div>
+        </div>
+        <div class="row2 mt-2 p">
+          <!---row2 Operator Key-->
+          <label for="vendor"> Operator Key: </label>
+          <div class="operatorkey d-flex justify-content-evenly">
+            <input type="text" class="form-control form-control-sm" id="inputfile" name="op_key_text"
+              aria-describedby="" />
+            <button type="button" class="btn btn-dark btn-sm mx-1" name="op_key_fetch">
+              Fatch
+            </button>
+            <button type="button" class="btn btn-dark btn-sm mx-1" name="op_key_auto">
+              Auto
+            </button>
+          </div>
+        </div>
+        <div class="row3 mt-2 p">
+          <!---row3  Data Size-->
+          <label for="vendor"> Data Size: </label>
+          <div class="transportKey d-flex justify-content-evenly">
+            <input type="text" class="form-control form-control-sm" id="inputfile" name="data_size_text"
+              aria-describedby="" />
+            <button type="button" class="btn btn-dark btn-sm mx-1" name="data_size_auto">
+              Auto
+            </button>
+          </div>
+        </div>
+        <div class="row4 mt-2 p">
+          <!---row4 IMSI-->
+          <label for="vendor"> IMSI: </label>
+          <div class="transportKey d-flex justify-content-evenly">
+            <input type="text" class="form-control form-control-sm" id="inputfile" name="imsi_text"
+              aria-describedby="" />
+            <button type="button" class="btn btn-dark btn-sm mx-1" name="imsi_auto">
+              Auto
+            </button>
+          </div>
+        </div>
+        <div class="row5 mt-2 p">
+          <!---row5 Iccid-->
+          <label for="vendor"> ICCID: </label>
+          <div class="transportKey d-flex justify-content-evenly">
+            <input type="text" class="form-control form-control-sm" id="inputfile" name="iccid_text"
+              aria-describedby="" />
+            <button type="button" class="btn btn-dark btn-sm mx-1" name="iccid_auto">
+              Auto
+            </button>
+          </div>
+        </div>
+        <!---row5 end-->
+        <div class="row6 mt-2 p-0 d-flex ">
+          <div class="col-6  ">
+            <div class="row ">
+              <label for=" "> Pin 1: </label><!---pin1 start-->
+              <div class="pin1 d-flex ">
+               
+                  <input type="text" class="form-control form-control-sm" id="" name="pin1_text" aria-describedby="" />
+                  <button type="button" class="btn btn-dark btn-sm mx-1" name="pin1_auto">
+                    Auto
+                  </button>
+                
+                <div class="fixedchk d-flex mt-1">
+                  <label class="form-check-label" for=""> Fixed </label>
+                  <div class="form-check mx-1">
+                    <input class="form-check-input" type="checkbox" id="" name="pin1_rand_check" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label for="vendor"> Pin 2: </label><!---pin1 start-->
+              <div class="pin1 d-flex justify-content-evenly">
+                <input type="text" class="form-control form-control-sm" id="inputfile" name="pin2_text"
+                  aria-describedby="" />
+                <button type="button" class="btn btn-dark btn-sm mx-1" name="pin2_auto">
+                  Auto
+                </button>
+                <div class="fixedchk d-flex mt-1">
+                  <label class="form-check-label" for="inlineFormCheck">
+                    Fixed
+                  </label>
+                  <div class="form-check mx-1">
+                    <input class="form-check-input" type="checkbox" id="inlineFormCheck" name="pin2_rand_check" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label for="vendor"> Adm 1: </label><!---pin1 start-->
+              <div class="pin1 d-flex justify-content-evenly">
+                <input type="text" class="form-control form-control-sm" id="inputfile" name="adm1_text"
+                  aria-describedby="" />
+                <button type="button" class="btn btn-dark btn-sm mx-1" name="adm1_auto">
+                  Auto
+                </button>
+                <div class="fixedchk d-flex mt-1">
+                  <label class="form-check-label" for="inlineFormCheck">
+                    Fixed
+                  </label>
+                  <div class="form-check mx-1">
+                    <input class="form-check-input" type="checkbox" id="inlineFormCheck" name="adm1_rand_check" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--ROW 6 left part end-->
+          <div class="col-6  ">
+            <div class="row ">
+              <label for="vendor"> Puk 1: </label><!---puk start-->
+              <div class="pin1 d-flex justify-content-evenly">
+                <input type="text" class="form-control form-control-sm" id="inputfile" name="puk1_text"
+                  aria-describedby="" />
+                <button type="button" class="btn btn-dark btn-sm mx-1" name="puk1_auto">
+                  Auto
+                </button>
+                <div class="fixedchk d-flex mt-1">
+                  <label class="form-check-label" for="inlineFormCheck">
+                    Fixed
+                  </label>
+                  <div class="form-check mx-1">
+                    <input class="form-check-input" type="checkbox" id="inlineFormCheck" name="puk1_rand_check" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label for="vendor"> Puk 2: </label><!---pin1 start-->
+              <div class="pin1 d-flex justify-content-evenly">
+                <input type="text" class="form-control form-control-sm" id="inputfile" name="puk2_text"
+                  aria-describedby="" />
+                <button type="button" class="btn btn-dark btn-sm mx-1" name="puk2_auto">
+                  Auto
+                </button>
+                <div class="fixedchk d-flex mt-1">
+                  <label class="form-check-label" for="inlineFormCheck">
+                    Fixed
+                  </label>
+                  <div class="form-check mx-1">
+                    <input class="form-check-input" type="checkbox" id="inlineFormCheck" name="puk2_rand_check" />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <label for="vendor"> Adm 6: </label><!---pin1 start-->
+              <div class="pin1 d-flex justify-content-evenly">
+                <input type="text" class="form-control form-control-sm" id="inputfile" name="adm6_text"
+                  aria-describedby="" />
+                <button type="button" class="btn btn-dark btn-sm mx-1" name="adm6_auto">
+                  Auto
+                </button>
+                <div class="fixedchk d-flex mt-1">
+                  <label class="form-check-label" for="inlineFormCheck">
+                    Fixed
+                  </label>
+                  <div class="form-check mx-1">
+                    <input class="form-check-input" type="checkbox" id="inlineFormCheck" name="adm6_rand_check" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--ROW 6 right part end-->
+        </div>
+      </div>
+    </form>
   </div>
 
   <a class="btn btn-secondary btn-sm" href="{% url 'document' %}">Back</a>
   <a class="btn btn-primary btn-sm" href="{% url 'electrical' %}">Next</a>
 </div>
-
-
-
 
 {% endblock content %}
