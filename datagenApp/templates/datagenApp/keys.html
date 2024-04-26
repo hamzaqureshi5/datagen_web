@@ -5,15 +5,17 @@ Generator {% endblock title %} {% block content %}
 <div class="tab mt-5">
   <div
     class="left_portion col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 shadow bg-body-tertiary rounded mx-auto p-5 mb-5 mt-5 text-left">
-    <form action="#">
+    <form action="#" method="post">
+      {% csrf_token %}
       <div class="row">
         <div class="row1">
           <!---row1 Transport key-->
           <label for="vendor text-left"> Transport Key: </label>
           <div class="transportKey d-flex">
             <input type="text" class="form-control form-control-sm" id="inputfile" name="k4_key_text" />
+
             <button type="button" class="btn btn-dark btn-sm mx-1" name="k4_key_fetch">
-              Fatch
+              Fetch
             </button>
             <button type="button" class="btn btn-dark btn-sm mx-1" name="k4_key_auto">
               Auto
@@ -27,7 +29,7 @@ Generator {% endblock title %} {% block content %}
             <input type="text" class="form-control form-control-sm" id="inputfile" name="op_key_text"
               aria-describedby="" />
             <button type="button" class="btn btn-dark btn-sm mx-1" name="op_key_fetch">
-              Fatch
+              Fetch
             </button>
             <button type="button" class="btn btn-dark btn-sm mx-1" name="op_key_auto">
               Auto
@@ -73,12 +75,12 @@ Generator {% endblock title %} {% block content %}
             <div class="row ">
               <label for=" "> Pin 1: </label><!---pin1 start-->
               <div class="pin1 d-flex ">
-               
-                  <input type="text" class="form-control form-control-sm" id="" name="pin1_text" aria-describedby="" />
-                  <button type="button" class="btn btn-dark btn-sm mx-1" name="pin1_auto">
-                    Auto
-                  </button>
-                
+
+                <input type="text" class="form-control form-control-sm" id="" name="pin1_text" aria-describedby="" />
+                <button type="button" class="btn btn-dark btn-sm mx-1" name="pin1_auto">
+                  Auto
+                </button>
+
                 <div class="fixedchk d-flex mt-1">
                   <label class="form-check-label" for=""> Fixed </label>
                   <div class="form-check mx-1">
@@ -184,11 +186,24 @@ Generator {% endblock title %} {% block content %}
           <!--ROW 6 right part end-->
         </div>
       </div>
+      <div class=" col-12  text-end me-5">
+        <button type="submit" class="btn btn-primary " name="submit">Submit </button>
+      </div>
     </form>
   </div>
 
   <a class="btn btn-secondary btn-sm" href="{% url 'document' %}">Back</a>
   <a class="btn btn-primary btn-sm" href="{% url 'electrical' %}">Next</a>
 </div>
+
+<script>
+  // Function to update output field
+  function updateOutput(value) {
+    // You can manipulate the input value here before setting it to the output field
+    // For example, you can convert it to uppercase, add prefixes, etc.
+    // Here, we'll simply set the output field value to the input value
+    document.getElementById("outputfile").value = value;
+  }
+</script>
 
 {% endblock content %}
