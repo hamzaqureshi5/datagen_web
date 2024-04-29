@@ -5,19 +5,21 @@ Generator {% endblock title %} {% block content %}
 <div class="tab mt-5">
   <div
     class="left_portion col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 shadow bg-body-tertiary rounded mx-auto p-5 mb-5 mt-5 text-left">
-    <form action="#" method="post">
+    <form method="post" action="#">
+
       {% csrf_token %}
       <div class="row">
         <div class="row1">
           <!---row1 Transport key-->
           <label for="vendor text-left"> Transport Key: </label>
           <div class="transportKey d-flex">
-            <input type="text" class="form-control form-control-sm" id="inputfile" name="k4_key_text" />
+            <!-- <input type="text" class="form-control form-control-sm" id="inputfile" name="k4_key_text" /> -->
+            <textarea class="form-control form-control-sm" id="outputfile" name="k4_key_text">{{ K4}}</textarea>
 
-            <button type="button" class="btn btn-dark btn-sm mx-1" name="k4_key_fetch">
+            <button type="button" class="btn btn-dark btn-sm mx-1" name="k4_key_fetch" id="fetch_button">
               Fetch
             </button>
-            <button type="button" class="btn btn-dark btn-sm mx-1" name="k4_key_auto">
+            <button type="button" class="btn btn-dark btn-sm mx-1" name="k4_key_auto" id="auto_button">
               Auto
             </button>
           </div>
@@ -26,12 +28,13 @@ Generator {% endblock title %} {% block content %}
           <!---row2 Operator Key-->
           <label for="vendor"> Operator Key: </label>
           <div class="operatorkey d-flex justify-content-evenly">
-            <input type="text" class="form-control form-control-sm" id="inputfile" name="op_key_text"
-              aria-describedby="" />
-            <button type="button" class="btn btn-dark btn-sm mx-1" name="op_key_fetch">
+            <!-- <input type="text" class="form-control form-control-sm" id="inputfile" name="op_key_text"
+              aria-describedby="" /> -->
+            <textarea class="form-control form-control-sm" id="outputfile" name="op_key_text">{{ OP}}</textarea>
+            <button type="button" class="btn btn-dark btn-sm mx-1" name="op_key_fetch" id="fetch_button">
               Fetch
             </button>
-            <button type="button" class="btn btn-dark btn-sm mx-1" name="op_key_auto">
+            <button type="button" class="btn btn-dark btn-sm mx-1" name="op_key_auto" id="auto_button">
               Auto
             </button>
           </div>
@@ -197,13 +200,26 @@ Generator {% endblock title %} {% block content %}
 </div>
 
 <script>
-  // Function to update output field
-  function updateOutput(value) {
-    // You can manipulate the input value here before setting it to the output field
-    // For example, you can convert it to uppercase, add prefixes, etc.
-    // Here, we'll simply set the output field value to the input value
-    document.getElementById("outputfile").value = value;
-  }
+  document.addEventListener("DOMContentLoaded", function () {
+    // Get references to the buttons, textarea, and hidden input field
+    const fetchButton = document.getElementById("fetch_button");
+    const autoButton = document.getElementById("auto_button");
+    const textarea = document.getElementById("outputfile");
+    const textValueInput = document.getElementById("text_value");
+
+    // Add click event listener for the fetch button
+    fetchButton.addEventListener("click", function () {
+      textarea.value = "Fetch";
+      textValueInput.value = "Fetch"; // Set the hidden input value
+    });
+
+    // Add click event listener for the auto button
+    autoButton.addEventListener("click", function () {
+      textarea.value = "Auto";
+      textValueInput.value = "Auto"; // Set the hidden input value
+    });
+  });
+
 </script>
 
 {% endblock content %}

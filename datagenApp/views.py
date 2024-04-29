@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth import logout
-from django.shortcuts import redirect
+from django.shortcuts import redirect, HttpResponse
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
@@ -70,6 +70,7 @@ from .utils import dg_function
 @login_required
 def keys(request):
     if request.method == "POST":
+
         input_k4_value = request.POST.get("k4_key_text", "")
         #        input_k4_value = request.POST.get("k4_key_text", "")
         a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11 = (
@@ -85,9 +86,28 @@ def keys(request):
             "11111",
             "11111",
         )
+    context = {
+        "K4": "Default",
+        "OP": "Default",
+    }
+    #    print("=================>", request.POST)
+    button_value = request.POST.get("k4_key_auto")
+    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", button_value)
 
-    print(dg_function())
-    return render(request, "datagenApp/keys.html")
+    # Or return it as part of the response
+    # if "k4_key_auto" in request.POST:
+    #     context = {
+    #         "K4": "AUTO",
+    #         "OP": "AUTO",
+    #     }
+    # elif "k4_key_fetch" in request.POST:
+    #     context = {
+    #         "K4": "Fetch",
+    #         "OP": "Fetch",
+    #     }
+
+    #    print(dg_function())
+    return render(request, "datagenApp/keys.html", context=context)
 
 
 @login_required
