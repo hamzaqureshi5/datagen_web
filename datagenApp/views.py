@@ -73,25 +73,14 @@ def keys(request):
         "K4": "Default",
         "OP": "Default",
     }
-
     if request.method == "POST":
+        #        if request.POST.get("k4_key", "") is not "":
         output = request.POST.get("k4_key", "")
-        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", output)
+        #        if request.POST.get("k4_key", "") is not "":
+        op_key = request.POST.get("op_key", "")
+        print("AAAAAAAAAAAAAAA", request.POST.get("k4_key", ""))
 
-    # Or return it as part of the response
-    # if "k4_key_auto" in request.POST:
-    #     context = {
-    #         "K4": "AUTO",
-    #         "OP": "AUTO",
-    #     }
-    # elif "k4_key_fetch" in request.POST:
-    #     context = {
-    #         "K4": "Fetch",
-    #         "OP": "Fetch",
-    #     }
-
-    #    print(dg_function())
-    context = {"K4": output}
+        context = {"K4": output, "OP": op_key}
     return render(request, "datagenApp/keys.html", context=context)
 
 

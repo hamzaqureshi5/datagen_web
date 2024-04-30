@@ -18,28 +18,31 @@ Generator {% endblock title %} {% block content %}
 
           <label for="vendor text-left"> Transport Key: </label>
           <div class="transportKey d-flex">
-            <!-- <input type="text" class="form-control form-control-sm" id="inputfile" name="k4_key_text" /> -->
-            <input type="text" id="outputfile" name="k4_key_text" value="{{ K4}}" readonly>
-
-            <button type="submit" class="btn btn-dark btn-sm mx-1" name="k4_key" id="fetch_button" value="fetch">
+            <input type="text" id="outputfile" name="k4_key_text" value="{{K4}}" readonly>
+            <button type="submit" class="btn btn-dark btn-sm mx-1" id="fetch_button" name="k4_key"
+              value="FFFFFFFFFFFFFFFFFF(FETCH)">
               Fetch
             </button>
-            <button type="submit" class="btn btn-dark btn-sm mx-1" name="k4_key" id="auto_button" value="auto">
+            <button type="submit" class="btn btn-dark btn-sm mx-1" id="auto_button" name="k4_key"
+              value="FFFFFFFFFFFFFFFFFF(RANDOM)">
               Auto
             </button>
+
+            <!-- <input type="checkbox" id="checkbox" name="checkbox">
+            <label for="checkbox">RANDOM</label> -->
           </div>
         </div>
         <div class="row2 mt-2 p">
           <!---row2 Operator Key-->
           <label for="vendor"> Operator Key: </label>
           <div class="operatorkey d-flex justify-content-evenly">
-            <!-- <input type="text" class="form-control form-control-sm" id="inputfile" name="op_key_text"
-              aria-describedby="" /> -->
-            <textarea class="form-control form-control-sm" id="outputfile" name="op_key_text">{{ OP}}</textarea>
-            <button type="button" class="btn btn-dark btn-sm mx-1" name="op_key_fetch" id="fetch_button">
+            <input type="text" id="outputfile" name="op_key_text" value="{{OP}}" readonly>
+            <button type="submit" class="btn btn-dark btn-sm mx-1" name="op_key" id="fetch_button"
+              value="FFFFFFFFFFFFFFFFFF(FETCH)">
               Fetch
             </button>
-            <button type="button" class="btn btn-dark btn-sm mx-1" name="op_key_auto" id="auto_button">
+            <button type="submit" class="btn btn-dark btn-sm mx-1" name="op_key" id="auto_button"
+              value="FFFFFFFFFFFFFFFFFF(RANDOM)">
               Auto
             </button>
           </div>
@@ -202,7 +205,22 @@ Generator {% endblock title %} {% block content %}
   <a class="btn btn-secondary btn-sm" href="{% url 'document' %}">Back</a>
   <a class="btn btn-primary btn-sm" href="{% url 'electrical' %}">Next</a>
 </div>
+<script>
+  // Get the checkbox element
+  var checkbox = document.getElementById('checkbox');
 
+  // Add event listener for 'change' event
+  checkbox.addEventListener('change', function () {
+    // Check if the checkbox is checked
+    if (this.checked) {
+      // If checked, fill the text box with "FFFFFF"
+      document.getElementById('output').value = "FFFFFF";
+    } else {
+      // If unchecked, leave the text box empty
+      document.getElementById('output').value = "";
+    }
+  });
+</script>
 <!-- <script>
   document.addEventListener("DOMContentLoaded", function () {
     // Get references to the buttons, textarea, and hidden input field
