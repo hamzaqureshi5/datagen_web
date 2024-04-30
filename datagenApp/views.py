@@ -69,30 +69,14 @@ from .utils import dg_function
 
 @login_required
 def keys(request):
-    if request.method == "POST":
-
-        input_k4_value = request.POST.get("k4_key_text", "")
-        #        input_k4_value = request.POST.get("k4_key_text", "")
-        a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11 = (
-            "11111",
-            "11111",
-            "11111",
-            "11111",
-            "11111",
-            "11111",
-            "11111",
-            "11111",
-            "11111",
-            "11111",
-            "11111",
-        )
     context = {
         "K4": "Default",
         "OP": "Default",
     }
-    #    print("=================>", request.POST)
-    button_value = request.POST.get("k4_key_auto")
-    print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", button_value)
+
+    if request.method == "POST":
+        output = request.POST.get("k4_key", "")
+        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", output)
 
     # Or return it as part of the response
     # if "k4_key_auto" in request.POST:
@@ -107,6 +91,7 @@ def keys(request):
     #     }
 
     #    print(dg_function())
+    context = {"K4": output}
     return render(request, "datagenApp/keys.html", context=context)
 
 

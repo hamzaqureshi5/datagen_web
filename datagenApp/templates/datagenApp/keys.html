@@ -11,15 +11,20 @@ Generator {% endblock title %} {% block content %}
       <div class="row">
         <div class="row1">
           <!---row1 Transport key-->
+          <!-- <button type="submit" name="letter" value="A">A</button>
+          <button type="submit" name="letter" value="B">B</button>
+
+          <input type="text" name="output" value="{{ output }}" readonly> -->
+
           <label for="vendor text-left"> Transport Key: </label>
           <div class="transportKey d-flex">
             <!-- <input type="text" class="form-control form-control-sm" id="inputfile" name="k4_key_text" /> -->
-            <textarea class="form-control form-control-sm" id="outputfile" name="k4_key_text">{{ K4}}</textarea>
+            <input type="text" id="outputfile" name="k4_key_text" value="{{ K4}}" readonly>
 
-            <button type="button" class="btn btn-dark btn-sm mx-1" name="k4_key_fetch" id="fetch_button">
+            <button type="submit" class="btn btn-dark btn-sm mx-1" name="k4_key" id="fetch_button" value="fetch">
               Fetch
             </button>
-            <button type="button" class="btn btn-dark btn-sm mx-1" name="k4_key_auto" id="auto_button">
+            <button type="submit" class="btn btn-dark btn-sm mx-1" name="k4_key" id="auto_button" value="auto">
               Auto
             </button>
           </div>
@@ -78,7 +83,6 @@ Generator {% endblock title %} {% block content %}
             <div class="row ">
               <label for=" "> Pin 1: </label><!---pin1 start-->
               <div class="pin1 d-flex ">
-
                 <input type="text" class="form-control form-control-sm" id="" name="pin1_text" aria-describedby="" />
                 <button type="button" class="btn btn-dark btn-sm mx-1" name="pin1_auto">
                   Auto
@@ -199,7 +203,7 @@ Generator {% endblock title %} {% block content %}
   <a class="btn btn-primary btn-sm" href="{% url 'electrical' %}">Next</a>
 </div>
 
-<script>
+<!-- <script>
   document.addEventListener("DOMContentLoaded", function () {
     // Get references to the buttons, textarea, and hidden input field
     const fetchButton = document.getElementById("fetch_button");
@@ -220,6 +224,6 @@ Generator {% endblock title %} {% block content %}
     });
   });
 
-</script>
+</script> -->
 
 {% endblock content %}
