@@ -78,7 +78,6 @@ def keys(request):
         output = request.POST.get("k4_key", "")
         #        if request.POST.get("k4_key", "") is not "":
         op_key = request.POST.get("op_key", "")
-        print("AAAAAAAAAAAAAAA", request.POST.get("k4_key", ""))
 
         context = {"K4": output, "OP": op_key}
     return render(request, "datagenApp/keys.html", context=context)
