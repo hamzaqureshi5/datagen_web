@@ -18,13 +18,13 @@ Generator {% endblock title %} {% block content %}
 
           <label for="vendor text-left"> Transport Key: </label>
           <div class="transportKey d-flex">
-            <input type="text" id="outputfile" name="k4_key_text" value="{{K4}}" readonly>
+            <input type="text" id="outputfile" name="k4_key_text" value="{{K4}}">
             <button type="submit" class="btn btn-dark btn-sm mx-1" id="fetch_button" name="k4_key"
-              value="FFFFFFFFFFFFFFFFFF(FETCH)">
+              value="k4_fetch_button">
               Fetch
             </button>
             <button type="submit" class="btn btn-dark btn-sm mx-1" id="auto_button" name="k4_key"
-              value="FFFFFFFFFFFFFFFFFF(RANDOM)">
+              value="k4_auto_button">
               Auto
             </button>
 
@@ -36,7 +36,7 @@ Generator {% endblock title %} {% block content %}
           <!---row2 Operator Key-->
           <label for="vendor"> Operator Key: </label>
           <div class="operatorkey d-flex justify-content-evenly">
-            <input type="text" id="outputfile" name="op_key_text" value="{{OP}}" readonly>
+            <input type="text" id="outputfile" name="op_key_text" value="{{OP}}">
             <button type="submit" class="btn btn-dark btn-sm mx-1" name="op_key" id="fetch_button"
               value="FFFFFFFFFFFFFFFFFF(FETCH)">
               Fetch
@@ -48,7 +48,6 @@ Generator {% endblock title %} {% block content %}
           </div>
         </div>
         <div class="row3 mt-2 p">
-          <!---row3  Data Size-->
           <label for="vendor"> Data Size: </label>
           <div class="transportKey d-flex justify-content-evenly">
             <input type="text" class="form-control form-control-sm" id="inputfile" name="data_size_text"
@@ -59,7 +58,6 @@ Generator {% endblock title %} {% block content %}
           </div>
         </div>
         <div class="row4 mt-2 p">
-          <!---row4 IMSI-->
           <label for="vendor"> IMSI: </label>
           <div class="transportKey d-flex justify-content-evenly">
             <input type="text" class="form-control form-control-sm" id="inputfile" name="imsi_text"
@@ -70,7 +68,6 @@ Generator {% endblock title %} {% block content %}
           </div>
         </div>
         <div class="row5 mt-2 p">
-          <!---row5 Iccid-->
           <label for="vendor"> ICCID: </label>
           <div class="transportKey d-flex justify-content-evenly">
             <input type="text" class="form-control form-control-sm" id="inputfile" name="iccid_text"
@@ -80,11 +77,10 @@ Generator {% endblock title %} {% block content %}
             </button>
           </div>
         </div>
-        <!---row5 end-->
         <div class="row6 mt-2 p-0 d-flex ">
           <div class="col-6  ">
             <div class="row ">
-              <label for=" "> Pin 1: </label><!---pin1 start-->
+              <label for=" "> Pin 1: </label>
               <div class="pin1 d-flex ">
                 <input type="text" class="form-control form-control-sm" id="" name="pin1_text" aria-describedby="" />
                 <button type="button" class="btn btn-dark btn-sm mx-1" name="pin1_auto">
@@ -100,7 +96,7 @@ Generator {% endblock title %} {% block content %}
               </div>
             </div>
             <div class="row">
-              <label for="vendor"> Pin 2: </label><!---pin1 start-->
+              <label for="vendor"> Pin 2: </label>
               <div class="pin1 d-flex justify-content-evenly">
                 <input type="text" class="form-control form-control-sm" id="inputfile" name="pin2_text"
                   aria-describedby="" />
@@ -118,7 +114,7 @@ Generator {% endblock title %} {% block content %}
               </div>
             </div>
             <div class="row">
-              <label for="vendor"> Adm 1: </label><!---pin1 start-->
+              <label for="vendor"> Adm 1: </label>
               <div class="pin1 d-flex justify-content-evenly">
                 <input type="text" class="form-control form-control-sm" id="inputfile" name="adm1_text"
                   aria-describedby="" />
@@ -136,10 +132,10 @@ Generator {% endblock title %} {% block content %}
               </div>
             </div>
           </div>
-          <!--ROW 6 left part end-->
+
           <div class="col-6  ">
             <div class="row ">
-              <label for="vendor"> Puk 1: </label><!---puk start-->
+              <label for="vendor"> Puk 1: </label>
               <div class="pin1 d-flex justify-content-evenly">
                 <input type="text" class="form-control form-control-sm" id="inputfile" name="puk1_text"
                   aria-describedby="" />
@@ -157,7 +153,7 @@ Generator {% endblock title %} {% block content %}
               </div>
             </div>
             <div class="row">
-              <label for="vendor"> Puk 2: </label><!---pin1 start-->
+              <label for="vendor"> Puk 2: </label>
               <div class="pin1 d-flex justify-content-evenly">
                 <input type="text" class="form-control form-control-sm" id="inputfile" name="puk2_text"
                   aria-describedby="" />
@@ -175,7 +171,7 @@ Generator {% endblock title %} {% block content %}
               </div>
             </div>
             <div class="row">
-              <label for="vendor"> Adm 6: </label><!---pin1 start-->
+              <label for="vendor"> Adm 6: </label>
               <div class="pin1 d-flex justify-content-evenly">
                 <input type="text" class="form-control form-control-sm" id="inputfile" name="adm6_text"
                   aria-describedby="" />

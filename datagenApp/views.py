@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 
-from .models import TextFile
+from .models import TextFile, EncryptionKeys
 import json
 
 
@@ -69,17 +69,37 @@ from .utils import dg_function
 
 @login_required
 def keys(request):
-    context = {
-        "K4": "Default",
-        "OP": "Default",
-    }
-    if request.method == "POST":
-        #        if request.POST.get("k4_key", "") is not "":
-        output = request.POST.get("k4_key", "")
-        #        if request.POST.get("k4_key", "") is not "":
-        op_key = request.POST.get("op_key", "")
 
-        context = {"K4": output, "OP": op_key}
+    #    if request.method == "POST":
+    # 	customer = request.user.customer
+    op = request.POST.get("op_key_text", "")
+    k4 = request.POST.get("k4_key_text", "")
+    si = request.POST.get("data_size_text", "")
+    iccid = request.POST.get("iccid_text", "")
+    imsi = request.POST.get("imsi_text", "")
+    pin1 = request.POST.get("pin1_text", "")
+    puk1 = request.POST.get("puk1_text", "")
+    pin2 = request.POST.get("pin2_text", "")
+    puk2 = request.POST.get("puk2_text", "")
+    adm1 = request.POST.get("adm1_text", "")
+    adm6 = request.POST.get("adm6_text", "")
+
+    EncryptionKeys.objects.create(
+        k4=k4,
+        op=op,
+        size=si,
+        iccid=iccid,
+        imsi=imsi,
+        pin1=pin1,
+        puk1=puk1,
+        pin2=pin2,
+        puk2=puk2,
+        adm1=adm1,
+        adm6=adm6,
+    )
+
+    context = {"K4": k4, "OP": op}
+    print("======================>", request.body)
     return render(request, "datagenApp/keys.html", context=context)
 
 
