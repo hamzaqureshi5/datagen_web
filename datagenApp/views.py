@@ -9,7 +9,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 
-from .models import TextFile, EncryptionKeys
+from .models import TextFile, EncryptionKeys, StartingParams, SecurityKeys, SecurityKeysRandomization
 import json
 
 
@@ -91,24 +91,33 @@ def keys(request):
     adm1_rand = request.POST.get("adm1_rand_check", False)
     adm6_rand = request.POST.get("adm6_rand_check", False)
 
-    EncryptionKeys.objects.create(
-        k4=k4,
-        op=op,
-        size=si,
-        iccid=iccid,
-        imsi=imsi,
+    SecurityKeys.objects.create(
         pin1=pin1,
         puk1=puk1,
         pin2=pin2,
         puk2=puk2,
         adm1=adm1,
         adm6=adm6,
+    )
+
+    SecurityKeysRandomization.objects.create(
         pin1_rand=pin1_rand,
         puk1_rand=puk1_rand,
         pin2_rand=pin2_rand,
         puk2_rand=puk2_rand,
         adm1_rand=adm1_rand,
         adm6_rand=adm6_rand,
+    )
+
+    EncryptionKeys.objects.create(
+        k4=k4,
+        op=op,
+    )
+
+    StartingParams.objects.create(
+        size=si,
+        iccid=iccid,
+        imsi=imsi,
     )
 
     context = {
