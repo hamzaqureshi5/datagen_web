@@ -111,8 +111,20 @@ def keys(request):
         adm6_rand=adm6_rand,
     )
 
-    context = {"K4": k4, "OP": op}
-    print("======================>", request.body)
+    context = {
+        "K4": k4,
+        "OP": op,
+        "SIZE": si,
+        "ICCID": iccid,
+        "IMSI": imsi,
+        "PIN1": pin1,
+        "PIN2": pin2,
+        "PUK1": puk1,
+        "PUK2": puk2,
+        "ADM1": adm1,
+        "ADM6": adm6,
+    }
+    #    print("======================>", request.body)
     return render(request, "datagenApp/keys.html", context=context)
 
 
