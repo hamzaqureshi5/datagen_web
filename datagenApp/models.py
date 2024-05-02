@@ -9,17 +9,20 @@ class TextFile(models.Model):
     def __str__(self):
         return self.file.name
 
+
 class StartingParams(models.Model):
     size = models.CharField(max_length=5, null=False, default="FFFFFFFFFFFFFFFFFFFFF")
     iccid = models.CharField(max_length=20, null=False, default="222222222222222222222")
-    imsi = models.CharField(max_length=15, null=False,  default="1111111111111111")
+    imsi = models.CharField(max_length=15, null=False, default="1111111111111111")
 
     def __str__(self):
         return self.iccid
 
+
 class EncryptionKeys(models.Model):
     k4 = models.CharField(max_length=64, null=False, default="FFFFFFFFFFFFFFFFFFFFF")
     op = models.CharField(max_length=64, null=False, default="FFFFFFFFFFFFFFFFFFFFF")
+
 
 class SecurityKeys(models.Model):
     pin1 = models.CharField(max_length=8, null=False, default="1234FFFF")

@@ -27,7 +27,14 @@ def dg_function():
     except Exception as e:
         print("An exception occurred:", str(e))
 
-from .models import SecurityKeys, SecurityKeysRandomization, EncryptionKeys, StartingParams
+
+from .models import (
+    SecurityKeys,
+    SecurityKeysRandomization,
+    EncryptionKeys,
+    StartingParams,
+)
+
 
 def save_keys(request):
     op = request.POST.get("op_key_text", "")

@@ -6,95 +6,120 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('datagenApp', '0014_encryptionkeys_adm1_rand_encryptionkeys_adm6_rand_and_more'),
+        (
+            "datagenApp",
+            "0014_encryptionkeys_adm1_rand_encryptionkeys_adm6_rand_and_more",
+        ),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='SecurityKeys',
+            name="SecurityKeys",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('pin1', models.CharField(default='1234FFFF', max_length=8)),
-                ('puk1', models.CharField(default='1234FFFF', max_length=8)),
-                ('pin2', models.CharField(default='1234FFFF', max_length=8)),
-                ('puk2', models.CharField(default='1234FFFF', max_length=8)),
-                ('adm1', models.CharField(default='1234FFFF', max_length=8)),
-                ('adm6', models.CharField(default='1234FFFF', max_length=8)),
-                ('pin1_rand', models.BooleanField(default=False)),
-                ('puk1_rand', models.BooleanField(default=False)),
-                ('pin2_rand', models.BooleanField(default=False)),
-                ('puk2_rand', models.BooleanField(default=False)),
-                ('adm1_rand', models.BooleanField(default=False)),
-                ('adm6_rand', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("pin1", models.CharField(default="1234FFFF", max_length=8)),
+                ("puk1", models.CharField(default="1234FFFF", max_length=8)),
+                ("pin2", models.CharField(default="1234FFFF", max_length=8)),
+                ("puk2", models.CharField(default="1234FFFF", max_length=8)),
+                ("adm1", models.CharField(default="1234FFFF", max_length=8)),
+                ("adm6", models.CharField(default="1234FFFF", max_length=8)),
+                ("pin1_rand", models.BooleanField(default=False)),
+                ("puk1_rand", models.BooleanField(default=False)),
+                ("pin2_rand", models.BooleanField(default=False)),
+                ("puk2_rand", models.BooleanField(default=False)),
+                ("adm1_rand", models.BooleanField(default=False)),
+                ("adm6_rand", models.BooleanField(default=False)),
             ],
         ),
         migrations.CreateModel(
-            name='StartingParams',
+            name="StartingParams",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('size', models.CharField(default='FFFFFFFFFFFFFFFFFFFFF', max_length=5)),
-                ('iccid', models.CharField(default='222222222222222222222', max_length=20)),
-                ('imsi', models.CharField(default='1111111111111111', max_length=15)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "size",
+                    models.CharField(default="FFFFFFFFFFFFFFFFFFFFF", max_length=5),
+                ),
+                (
+                    "iccid",
+                    models.CharField(default="222222222222222222222", max_length=20),
+                ),
+                ("imsi", models.CharField(default="1111111111111111", max_length=15)),
             ],
         ),
         migrations.RemoveField(
-            model_name='encryptionkeys',
-            name='adm1',
+            model_name="encryptionkeys",
+            name="adm1",
         ),
         migrations.RemoveField(
-            model_name='encryptionkeys',
-            name='adm1_rand',
+            model_name="encryptionkeys",
+            name="adm1_rand",
         ),
         migrations.RemoveField(
-            model_name='encryptionkeys',
-            name='adm6',
+            model_name="encryptionkeys",
+            name="adm6",
         ),
         migrations.RemoveField(
-            model_name='encryptionkeys',
-            name='adm6_rand',
+            model_name="encryptionkeys",
+            name="adm6_rand",
         ),
         migrations.RemoveField(
-            model_name='encryptionkeys',
-            name='iccid',
+            model_name="encryptionkeys",
+            name="iccid",
         ),
         migrations.RemoveField(
-            model_name='encryptionkeys',
-            name='imsi',
+            model_name="encryptionkeys",
+            name="imsi",
         ),
         migrations.RemoveField(
-            model_name='encryptionkeys',
-            name='pin1',
+            model_name="encryptionkeys",
+            name="pin1",
         ),
         migrations.RemoveField(
-            model_name='encryptionkeys',
-            name='pin1_rand',
+            model_name="encryptionkeys",
+            name="pin1_rand",
         ),
         migrations.RemoveField(
-            model_name='encryptionkeys',
-            name='pin2',
+            model_name="encryptionkeys",
+            name="pin2",
         ),
         migrations.RemoveField(
-            model_name='encryptionkeys',
-            name='pin2_rand',
+            model_name="encryptionkeys",
+            name="pin2_rand",
         ),
         migrations.RemoveField(
-            model_name='encryptionkeys',
-            name='puk1',
+            model_name="encryptionkeys",
+            name="puk1",
         ),
         migrations.RemoveField(
-            model_name='encryptionkeys',
-            name='puk1_rand',
+            model_name="encryptionkeys",
+            name="puk1_rand",
         ),
         migrations.RemoveField(
-            model_name='encryptionkeys',
-            name='puk2',
+            model_name="encryptionkeys",
+            name="puk2",
         ),
         migrations.RemoveField(
-            model_name='encryptionkeys',
-            name='puk2_rand',
+            model_name="encryptionkeys",
+            name="puk2_rand",
         ),
         migrations.RemoveField(
-            model_name='encryptionkeys',
-            name='size',
+            model_name="encryptionkeys",
+            name="size",
         ),
     ]

@@ -24,6 +24,7 @@ Generator {% endblock title %} {% block content %}
               id="outputfile"
               name="k4_key_text"
               value="{{ K4 }}"
+              minlength="32"
               maxlength="64"
               required
             />
@@ -60,6 +61,7 @@ Generator {% endblock title %} {% block content %}
               id="outputfile"
               name="op_key_text"
               value="{{ OP }}"
+              minlength="32"
               maxlength="32"
               required
             />
@@ -91,6 +93,7 @@ Generator {% endblock title %} {% block content %}
               class="form-control form-control-sm"
               id="inputfile"
               name="data_size_text"
+              minlength="1"
               maxlength="6"
               value="{{ SIZE }}"
               pattern="[0-9]*"
@@ -115,6 +118,7 @@ Generator {% endblock title %} {% block content %}
               class="form-control form-control-sm"
               id="inputfile"
               name="imsi_text"
+              minlength="15"
               maxlength="15"
               value="{{ IMSI }}"
               pattern="[0-9]*"
@@ -139,6 +143,7 @@ Generator {% endblock title %} {% block content %}
               class="form-control form-control-sm"
               id="inputfile"
               name="iccid_text"
+              minlength="18"
               maxlength="20"
               value="{{ ICCID }}"
               pattern="[0-9]*"
@@ -167,6 +172,7 @@ Generator {% endblock title %} {% block content %}
                   name="pin1_text"
                   aria-describedby=""
                   value="{{ PIN1 }}"
+                  minlength="4"
                   maxlength="4"
                   required
                 />
@@ -200,6 +206,7 @@ Generator {% endblock title %} {% block content %}
                   class="form-control form-control-sm"
                   id="inputfile"
                   name="pin2_text"
+                  minlength="4"
                   maxlength="4"
                   value="{{ PIN2 }}"
                   aria-describedby=""
@@ -236,6 +243,7 @@ Generator {% endblock title %} {% block content %}
                   class="form-control form-control-sm"
                   id="inputfile"
                   name="adm1_text"
+                  minlength="4"
                   maxlength="8"
                   value="{{ ADM1 }}"
                   aria-describedby=""
@@ -275,6 +283,7 @@ Generator {% endblock title %} {% block content %}
                   class="form-control form-control-sm"
                   id="inputfile"
                   name="puk1_text"
+                  minlength="4"
                   maxlength="8"
                   value="{{ PUK1 }}"
                   aria-describedby=""
@@ -311,6 +320,7 @@ Generator {% endblock title %} {% block content %}
                   class="form-control form-control-sm"
                   id="inputfile"
                   name="puk2_text"
+                  minlength="4"
                   maxlength="8"
                   value="{{ PUK2 }}"
                   aria-describedby=""
@@ -347,6 +357,7 @@ Generator {% endblock title %} {% block content %}
                   class="form-control form-control-sm"
                   id="inputfile"
                   name="adm6_text"
+                  minlength="4"
                   maxlength="8"
                   value="{{ ADM6 }}"
                   aria-describedby=""

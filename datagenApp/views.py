@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect ,HttpResponse
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -7,7 +7,13 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 
-from .models import TextFile, EncryptionKeys, StartingParams, SecurityKeys, SecurityKeysRandomization
+from .models import (
+    TextFile,
+    EncryptionKeys,
+    StartingParams,
+    SecurityKeys,
+    SecurityKeysRandomization,
+)
 from .utils import dg_function, save_keys
 
 import json
@@ -31,19 +37,15 @@ def user_login(request):
             messages.error(request, "Invalid username or password.")
             return redirect(
                 "login"
-            )  # Replace 'login' with the name of your login page URL pattern
+            ) 
 
-    return render(
-        request, "datagenApp/login.html"
-    )  # Replace 'login.html' with the name of your login template
+    return render(request, "datagenApp/login.html")
 
 
 def logout_view(request):
     logout(request)
     # Redirect to a success page.
-    return HttpResponseRedirect(
-        reverse("login")
-    )  # Assuming 'home' is the name of your home page URL pattern
+    return HttpResponseRedirect(reverse("login"))
 
 
 @login_required

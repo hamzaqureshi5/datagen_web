@@ -30,7 +30,7 @@ from datagen.STCAppScriptV6 import (
 
 
 # from datagen.database_operations import database
-#from datagen.my_sql_database import sqldatabase
+# from datagen.my_sql_database import sqldatabase
 from datagen.GlobalParams import PARAMETERS, DATA_FRAMES
 from datagen.message import messageBox
 from datagen.operators.zong.FileWriter import ZongFileWriter
@@ -551,7 +551,7 @@ class MainWindow(QMainWindow):
                 messageBox.Show_message_box(
                     "Information",
                     "Data has been generated successfully.\nHowever, access to view this data is restricted to "
-                    "administrators only.\nPlease click the 'SAVE' to save the files in the designated directory."
+                    "administrators only.\nPlease click the 'SAVE' to save the files in the designated directory.",
                     # "Data is generated but only admin has access to view data\nPress GENERATE to save files in
                     # DIR",
                 )
@@ -626,7 +626,8 @@ class MainWindow(QMainWindow):
         #        date_time = f"{p_date}_{p_time}"
 
         self.ui.textEdit.append(
-            f"Directory Name: " + f'<a href="{com_path}" style="color: black;">{com_path}</a>'
+            f"Directory Name: "
+            + f'<a href="{com_path}" style="color: black;">{com_path}</a>'
         )
 
         self.ui.textEdit.append("Path: " + os.path.join(os.getcwd(), com_path))
@@ -1364,7 +1365,7 @@ def run_application():
     pass
 
 
-#class SignUp(QDialog, messageBox, sqldatabase):
+# class SignUp(QDialog, messageBox, sqldatabase):
 class SignUp(QDialog, messageBox):
     def __init__(self):
         super(SignUp, self).__init__()
@@ -1376,8 +1377,8 @@ class SignUp(QDialog, messageBox):
         self.setWindowIcon(QIcon(STC_ICON))
         self.setWindowTitle("Create Login Account")
 
-#        self.conn = sqldatabase()
-#        self.conn.initializeDatabase()
+        #        self.conn = sqldatabase()
+        #        self.conn.initializeDatabase()
 
         self.ui.btn_signup.clicked.connect(self.signup_2_login_func)
         self.ui.btn_login.clicked.connect(self.createAccount)
@@ -1409,13 +1410,13 @@ class SignUp(QDialog, messageBox):
             self.Show_message_box("Message", "Enter Valid Email")
             return
 
-        # if password == re_password:
-        #     result, success = self.conn.insertData(
-        #         user_name=username,
-        #         user_pass=password,
-        #         user_email=email,
-        #         user_role="user",
-        #     )
+            # if password == re_password:
+            #     result, success = self.conn.insertData(
+            #         user_name=username,
+            #         user_pass=password,
+            #         user_email=email,
+            #         user_role="user",
+            #     )
 
             if success is True:
                 self.Show_message_box("Message", "Login Created Successfully")
@@ -1447,8 +1448,8 @@ class LoginWindow(QDialog, messageBox):
         self.ui.setupUi(self)
         self.ui.label.setPixmap(QPixmap(STC_ICON))
 
-#        self.conn = sqldatabase()
-#        self.conn.initializeDatabase()
+        #        self.conn = sqldatabase()
+        #        self.conn.initializeDatabase()
 
         self.setWindowIcon(QIcon(STC_ICON))
         self.setWindowTitle("Login Account")
@@ -1468,7 +1469,7 @@ class LoginWindow(QDialog, messageBox):
         # result, success = self.conn.checkCredentials(
         #     username=username, password=password
         # )
-        result, success = "admin",True
+        result, success = "admin", True
 
         if success:
             #            global user_role

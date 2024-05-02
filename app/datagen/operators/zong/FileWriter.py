@@ -270,9 +270,9 @@ Generated on          : {generated_on}
         )
         self.write_header(self._out_graph_path, zong_output_laser_file_format)
 
-#    @before_call(write_laser_template)
+    #    @before_call(write_laser_template)
     def Generate_laser_file(self, x, df):
-#        self.write_laser_variables(x)
+        #        self.write_laser_variables(x)
 
         try:
             self.write_df(self._out_graph_path, df, False, self.seperators[2])
@@ -315,7 +315,7 @@ Generated on          : {generated_on}
         )
         self.write_header(self._out_elect_path, zong_output_laser_file_format)
 
-#    @before_call(write_elect_template)
+    #    @before_call(write_elect_template)
     def Generate_elect_file(self, x, df=None):
         self.write_elect_variables(x)
 
