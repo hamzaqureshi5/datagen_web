@@ -1,15 +1,15 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect ,HttpResponse
+from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-from django.contrib.auth import logout
-from django.shortcuts import redirect, HttpResponse
 from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 
 from .models import TextFile, EncryptionKeys, StartingParams, SecurityKeys, SecurityKeysRandomization
+from .utils import dg_function, save_keys
+
 import json
 
 
@@ -18,7 +18,6 @@ def user_login(request):
         username = request.POST.get("username")
         password = request.POST.get("password")
         remember_me = request.POST.get("remember_me")
-        print("--------------------->", remember_me)
 
         user = authenticate(request, username=username, password=password)
 
@@ -50,9 +49,6 @@ def logout_view(request):
 @login_required
 def document(request):
     context = {"result": "Sucessfully uploaded!"}
-    print(
-        "--------------------->This message will be printed in the console or terminal where Django server is running."
-    )
 
     if request.method == "POST" and request.FILES.get("file"):
         uploaded_file = request.FILES["file"]
@@ -64,76 +60,9 @@ def document(request):
     return render(request, "datagenApp/document.html", context)
 
 
-from .utils import dg_function
-
-
 @login_required
 def keys(request):
-
-    #    if request.method == "POST":
-    # 	customer = request.user.customer
-    op = request.POST.get("op_key_text", "")
-    k4 = request.POST.get("k4_key_text", "")
-    si = request.POST.get("data_size_text", "")
-    iccid = request.POST.get("iccid_text", "")
-    imsi = request.POST.get("imsi_text", "")
-    pin1 = request.POST.get("pin1_text", "")
-    puk1 = request.POST.get("puk1_text", "")
-    pin2 = request.POST.get("pin2_text", "")
-    puk2 = request.POST.get("puk2_text", "")
-    adm1 = request.POST.get("adm1_text", "")
-    adm6 = request.POST.get("adm6_text", "")
-
-    pin1_rand = request.POST.get("pin1_rand_check", False)
-    puk1_rand = request.POST.get("puk1_rand_check", False)
-    pin2_rand = request.POST.get("pin2_rand_check", False)
-    puk2_rand = request.POST.get("puk2_rand_check", False)
-    adm1_rand = request.POST.get("adm1_rand_check", False)
-    adm6_rand = request.POST.get("adm6_rand_check", False)
-
-    SecurityKeys.objects.create(
-        pin1=pin1,
-        puk1=puk1,
-        pin2=pin2,
-        puk2=puk2,
-        adm1=adm1,
-        adm6=adm6,
-    )
-
-    SecurityKeysRandomization.objects.create(
-        pin1_rand=pin1_rand,
-        puk1_rand=puk1_rand,
-        pin2_rand=pin2_rand,
-        puk2_rand=puk2_rand,
-        adm1_rand=adm1_rand,
-        adm6_rand=adm6_rand,
-    )
-
-    EncryptionKeys.objects.create(
-        k4=k4,
-        op=op,
-    )
-
-    StartingParams.objects.create(
-        size=si,
-        iccid=iccid,
-        imsi=imsi,
-    )
-
-    context = {
-        "K4": k4,
-        "OP": op,
-        "SIZE": si,
-        "ICCID": iccid,
-        "IMSI": imsi,
-        "PIN1": pin1,
-        "PIN2": pin2,
-        "PUK1": puk1,
-        "PUK2": puk2,
-        "ADM1": adm1,
-        "ADM6": adm6,
-    }
-    #    print("======================>", request.body)
+    context = save_keys(request)
     return render(request, "datagenApp/keys.html", context=context)
 
 
