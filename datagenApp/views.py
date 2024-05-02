@@ -84,6 +84,13 @@ def keys(request):
     adm1 = request.POST.get("adm1_text", "")
     adm6 = request.POST.get("adm6_text", "")
 
+    pin1_rand = request.POST.get("pin1_rand_check", False)
+    puk1_rand = request.POST.get("puk1_rand_check", False)
+    pin2_rand = request.POST.get("pin2_rand_check", False)
+    puk2_rand = request.POST.get("puk2_rand_check", False)
+    adm1_rand = request.POST.get("adm1_rand_check", False)
+    adm6_rand = request.POST.get("adm6_rand_check", False)
+
     EncryptionKeys.objects.create(
         k4=k4,
         op=op,
@@ -96,6 +103,12 @@ def keys(request):
         puk2=puk2,
         adm1=adm1,
         adm6=adm6,
+        pin1_rand=pin1_rand,
+        puk1_rand=puk1_rand,
+        pin2_rand=pin2_rand,
+        puk2_rand=puk2_rand,
+        adm1_rand=adm1_rand,
+        adm6_rand=adm6_rand,
     )
 
     context = {"K4": k4, "OP": op}
