@@ -74,18 +74,18 @@
 
 <script>
   const defaultData = [
-    { id: 1, variable: 'ICCID', clip: '0', length: '19' },
-    { id: 2, variable: 'IMSI', clip: '0', length: '14' },
-    { id: 3, variable: 'PIN1', clip: '0', length: '3' },
-    { id: 3, variable: 'PUK1', clip: '0', length: '3' },
-    { id: 3, variable: 'PIN2', clip: '0', length: '3' },
-    { id: 3, variable: 'PUK2', clip: '0', length: '3' },
-    { id: 3, variable: 'KI', clip: '0', length: '31' },
-    { id: 3, variable: 'EKI', clip: '0', length: '31' },
-    { id: 3, variable: 'OPC', clip: '0', length: '31' },
-    { id: 3, variable: 'ADM1', clip: '0', length: '3' },
-    { id: 3, variable: 'ADM6', clip: '0', length: '3' },
-    { id: 3, variable: 'ACC', clip: '0', length: '3' }
+    { id: 1, parameter: 'ICCID', lclip: '0', rclip: '19' },
+    { id: 2, parameter: 'IMSI', lclip: '0', rclip: '14' },
+    { id: 3, parameter: 'PIN1', lclip: '0', rclip: '3' },
+    { id: 4, parameter: 'PUK1', lclip: '0', rclip: '3' },
+    { id: 5, parameter: 'PIN2', lclip: '0', rclip: '3' },
+    { id: 6, parameter: 'PUK2', lclip: '0', rclip: '3' },
+    { id: 7, parameter: 'KI', lclip: '0', rclip: '31' },
+    { id: 8, parameter: 'EKI', lclip: '0', rclip: '31' },
+    { id: 9, parameter: 'OPC', lclip: '0', rclip: '31' },
+    { id: 10, parameter: 'ADM1', lclip: '0', rclip: '3' },
+    { id: 11, parameter: 'ADM6', lclip: '0', rclip: '3' },
+    { id: 12, parameter: 'ACC', lclip: '0', rclip: '3' }
   ];
 
   document.getElementById('e_add_text').addEventListener('click', addRowFromDefault);
@@ -96,7 +96,7 @@
   function addRowFromDefault() {
     const comboBox = document.getElementById('e_comboBox');
     const selectedValue = comboBox.value;
-    const data = defaultData.find(item => item.variable === selectedValue);
+    const data = defaultData.find(item => item.parameter === selectedValue);
 
     if (!data) {
       alert('Please select a valid option.');
@@ -108,9 +108,9 @@
     row.onclick = function() { selectRow(this); };
     row.innerHTML = `
       <td>${table.rows.length}</td>
-      <td>${data.variable}</td>
-      <td>${data.clip}</td>
-      <td>${data.length}</td>
+      <td>${data.parameter}</td>
+      <td>${data.lclip}</td>
+      <td>${data.rclip}</td>
     `;
   }
 
@@ -130,9 +130,9 @@
       const row = table.insertRow();
       row.innerHTML = `
         <td>${data.id}</td>
-        <td>${data.variable}</td>
-        <td>${data.clip}</td>
-        <td>${data.length}</td>
+        <td>${data.parameter}</td>
+        <td>${data.lclip}</td>
+        <td>${data.rclip}</td>
       `;
       row.onclick = function() { selectRow(this); };
     });
@@ -152,13 +152,13 @@ function saveData() {
         const cells = row.cells;
         return {
             id: index + 1, 
-            variable: cells[1].textContent,
-            clip: cells[2].textContent,
-            length: cells[3].textContent
+            parameter: cells[1].textContent,
+            lclip: cells[2].textContent,
+            rclip: cells[3].textContent
         };
     });
 
-    fetch("{% url 'save_data' %}", {
+    fetch("{% url 'save_electrical' %}", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

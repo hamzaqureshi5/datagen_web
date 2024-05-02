@@ -43,7 +43,13 @@ class SecurityKeysRandomization(models.Model):
 
 
 class ElectricalDataJson(models.Model):
-#    id = models.IntegerField(null=False, primary_key=True)
+    id = models.IntegerField(null=False, primary_key=True)
+    parameter = models.CharField(null=False, default="DEFAULT", max_length=10)
+    lclip = models.IntegerField(null=False, default=0)
+    rclip = models.IntegerField(null=False, default=32)
+
+class GraphicalDataJson(models.Model):
+    id = models.IntegerField(null=False, primary_key=True)
     parameter = models.CharField(null=False, default="DEFAULT", max_length=10)
     lclip = models.IntegerField(null=False, default=0)
     rclip = models.IntegerField(null=False, default=32)

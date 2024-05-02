@@ -14,7 +14,7 @@ from .models import (
     EncryptionKeys,
     StartingParams,
     SecurityKeys,
-    SecurityKeysRandomization, ElectricalDataJson
+    SecurityKeysRandomization, ElectricalDataJson, GraphicalDataJson
 )
 from .utils import dg_function, save_keys
 
@@ -64,14 +64,28 @@ def document(request):
     return render(request, "datagenApp/document.html", context)
 
 @csrf_exempt  # Consider CSRF protection as needed
-def save_data(request):
-    print ("Saving data")
+def save_electrical(request):
     if request.method == 'POST':
         data = json.loads(request.body)
+        print(data)
         ElectricalDataJson.objects.all().delete()
         data_objects = [
-        ElectricalDataJson(parameter=item['variable'], lclip=item['clip'], rclip=item['length'])for item in data]
+        ElectricalDataJson(id=item['id'], parameter=item['parameter'], lclip=item['lclip'], rclip=item['rclip'])for item in data]
         ElectricalDataJson.objects.bulk_create(data_objects)
+#        with open('file.json', 'w') as f:
+#            json.dump(data, f, indent=4)
+        return JsonResponse({"status": "success", "message": "Data saved successfully."})
+    return JsonResponse({"status": "error", "message": "Invalid request"}, status=400)
+
+@csrf_exempt  # Consider CSRF protection as needed
+def save_graphical(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        print(data)
+        GraphicalDataJson.objects.all().delete()
+        data_objects = [
+        GraphicalDataJson(id=item['id'], parameter=item['parameter'], lclip=item['lclip'], rclip=item['rclip'])for item in data]
+        GraphicalDataJson.objects.bulk_create(data_objects)
 #        with open('file.json', 'w') as f:
 #            json.dump(data, f, indent=4)
         return JsonResponse({"status": "success", "message": "Data saved successfully."})
