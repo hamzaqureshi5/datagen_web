@@ -40,3 +40,10 @@ class SecurityKeysRandomization(models.Model):
     puk2_rand = models.BooleanField(null=False, default=False)
     adm1_rand = models.BooleanField(null=False, default=False)
     adm6_rand = models.BooleanField(null=False, default=False)
+
+
+class ElectricalDataJson(models.Model):
+#    id = models.IntegerField(null=False, primary_key=True)
+    parameter = models.CharField(null=False, default="DEFAULT", max_length=10)
+    lclip = models.IntegerField(null=False, default=0)
+    rclip = models.IntegerField(null=False, default=32)

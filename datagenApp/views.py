@@ -6,13 +6,15 @@ from django.contrib import messages
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import (
     TextFile,
     EncryptionKeys,
     StartingParams,
     SecurityKeys,
-    SecurityKeysRandomization,
+    SecurityKeysRandomization, ElectricalDataJson
 )
 from .utils import dg_function, save_keys
 
@@ -61,6 +63,19 @@ def document(request):
 
     return render(request, "datagenApp/document.html", context)
 
+@csrf_exempt  # Consider CSRF protection as needed
+def save_data(request):
+    print ("Saving data")
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        ElectricalDataJson.objects.all().delete()
+        data_objects = [
+        ElectricalDataJson(parameter=item['variable'], lclip=item['clip'], rclip=item['length'])for item in data]
+        ElectricalDataJson.objects.bulk_create(data_objects)
+#        with open('file.json', 'w') as f:
+#            json.dump(data, f, indent=4)
+        return JsonResponse({"status": "success", "message": "Data saved successfully."})
+    return JsonResponse({"status": "error", "message": "Invalid request"}, status=400)
 
 @login_required
 def keys(request):

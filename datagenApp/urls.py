@@ -27,6 +27,7 @@ urlpatterns = [
     path("document/", views.document, name="document"),
     path("keys/", views.keys, name="keys"),
     path("electrical/", views.electrical, name="electrical"),
+    path("save_data/", views.save_data, name="save_data"),
     path("graphical/", views.graphical, name="graphical"),
     path("preview/", views.preview, name="preview"),
     path("generate/", views.generate, name="generate"),
