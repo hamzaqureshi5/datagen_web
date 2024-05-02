@@ -16,10 +16,8 @@ from .models import (
     SecurityKeys,
     SecurityKeysRandomization, ElectricalDataJson, GraphicalDataJson, Zong_Input_Dataframe
 )
-from .utils import dg_function, save_keys
-from app.datagen.operators.zong.FileParser import ZongFileParser
+from .utils import save_keys, save_electrical_data, save_graphical_data, save_uploaded_file
 import json
-import pandas as pd
 
 def user_login(request):
     if request.method == "POST":
@@ -46,60 +44,37 @@ def user_login(request):
 
 def logout_view(request):
     logout(request)
-    # Redirect to a success page.
     return HttpResponseRedirect(reverse("login"))
 
 
 @login_required
 def document(request):
-    context = {"result": "Sucessfully uploaded!"}
-
+    context = {"result": "Sucessfully uploaded!", "success": False}
     if request.method == "POST" and request.FILES.get("file"):
         uploaded_file = request.FILES["file"]
-        text_file = TextFile(file=uploaded_file)
-        text_file.file_path = uploaded_file.name
-        text_file.save()
-    context = {"result": "Error loading file!"}
+        try:
+            save_uploaded_file(uploaded_file)
+            context["result"] = str("File uploaded successfully")
+            context["success"] = True
 
-    m_zong = ZongFileParser("N20230311111111111.txt")
-    df = pd.DataFrame()
-    df = m_zong.input_file_handle()
-    print(df)
-    del m_zong
-
-    Zong_Input_Dataframe.objects.all().delete()
-
-    instances = [Zong_Input_Dataframe(id=index , iccid =row['ICCID'],imsi=row['IMSI']) for index, row in df.iterrows() ]
-    Zong_Input_Dataframe.objects.bulk_create(instances)
+        except Exception as e:
+            context["result"] = str(e)
+            context["success"] = False
 
     return render(request, "datagenApp/document.html", context)
 
-@csrf_exempt  # Consider CSRF protection as needed
+@csrf_exempt
 def save_electrical(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        print(data)
-        ElectricalDataJson.objects.all().delete()
-        data_objects = [
-        ElectricalDataJson(id=item['id'], parameter=item['parameter'], lclip=item['lclip'], rclip=item['rclip'])for item in data]
-        ElectricalDataJson.objects.bulk_create(data_objects)
-#        with open('file.json', 'w') as f:
-#            json.dump(data, f, indent=4)
-        return JsonResponse({"status": "success", "message": "Data saved successfully."})
+        return save_electrical_data(data)
     return JsonResponse({"status": "error", "message": "Invalid request"}, status=400)
 
-@csrf_exempt  # Consider CSRF protection as needed
+@csrf_exempt
 def save_graphical(request):
     if request.method == 'POST':
         data = json.loads(request.body)
-        print(data)
-        GraphicalDataJson.objects.all().delete()
-        data_objects = [
-        GraphicalDataJson(id=item['id'], parameter=item['parameter'], lclip=item['lclip'], rclip=item['rclip'])for item in data]
-        GraphicalDataJson.objects.bulk_create(data_objects)
-#        with open('file.json', 'w') as f:
-#            json.dump(data, f, indent=4)
-        return JsonResponse({"status": "success", "message": "Data saved successfully."})
+        return save_graphical_data(data)
     return JsonResponse({"status": "error", "message": "Invalid request"}, status=400)
 
 @login_required

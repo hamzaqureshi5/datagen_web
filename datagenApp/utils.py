@@ -1,5 +1,10 @@
 import json
 import requests
+import json
+from django.http import JsonResponse
+from app.datagen.operators.zong.FileParser import ZongFileParser
+from .models import (SecurityKeys,SecurityKeysRandomization, EncryptionKeys,StartingParams,TextFile, Zong_Input_Dataframe, ElectricalDataJson, GraphicalDataJson)
+
 
 
 def read_json(file_path: str):
@@ -8,32 +13,36 @@ def read_json(file_path: str):
     return dict(data)
 
 
-url_m = "http://127.0.0.1:5551/dg"
 
+def save_uploaded_file(uploaded_file):
+    obj = TextFile.objects.all().delete()
+    obj = TextFile.objects.create(file=uploaded_file.name)
+    obj.save()
 
-def dg_function():
-    try:
-        data = read_json(
-            "settings.json"
-        )  # You need to define a function to read JSON from a file
-        print(data)
-        print("======================")
-        response = requests.post(url=url_m, json=data)
-        if response.status_code == 200:
-            print("Request sent successfully")
-        else:
-            print("Error: Status Code", response.status_code)
+    m_zong = ZongFileParser(uploaded_file.name)
+    df = m_zong.input_file_handle()
+    del m_zong
 
-    except Exception as e:
-        print("An exception occurred:", str(e))
+    Zong_Input_Dataframe.objects.all().delete()
 
+    instances = [Zong_Input_Dataframe(id=index, iccid=row['ICCID'], imsi=row['IMSI']) for index, row in df.iterrows()]
+    Zong_Input_Dataframe.objects.bulk_create(instances)
 
-from .models import (
-    SecurityKeys,
-    SecurityKeysRandomization,
-    EncryptionKeys,
-    StartingParams,
-)
+def save_electrical_data(data):
+    ElectricalDataJson.objects.all().delete()
+    data_objects = [
+        ElectricalDataJson(id=item['id'], parameter=item['parameter'], lclip=item['lclip'], rclip=item['rclip']) for
+        item in data]
+    ElectricalDataJson.objects.bulk_create(data_objects)
+    return JsonResponse({"status": "success", "message": "Data saved successfully."})
+
+def save_graphical_data(data):
+    GraphicalDataJson.objects.all().delete()
+    data_objects = [
+        GraphicalDataJson(id=item['id'], parameter=item['parameter'], lclip=item['lclip'], rclip=item['rclip']) for
+        item in data]
+    GraphicalDataJson.objects.bulk_create(data_objects)
+    return JsonResponse({"status": "success", "message": "Data saved successfully."})
 
 
 def save_keys(request):

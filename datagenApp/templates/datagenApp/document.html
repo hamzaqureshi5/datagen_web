@@ -6,11 +6,11 @@ Generator {% endblock title %} {% block content %}
     class="left_portion col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 shadow bg-body-tertiary rounded mx-auto p-5 mb-5 mt-5"
   >
     <h3 class="text-center">Load Input File</h3>
-    {% if result %}
-    <div class="alert alert-danger">{{ result }}</div>
+    {% if success %}
+    <div class="alert alert-success">{{ result }}</div>
     <!-- Display the error message if it exists -->
     {% else %}
-    <div class="alert alert-success">{{ result }}</div>
+    <div class="alert alert-danger">{{ result }}</div>
     <!-- Display a success message if no error exists -->
     {% endif %}
     <form method="post" enctype="multipart/form-data">
@@ -64,8 +64,27 @@ Generator {% endblock title %} {% block content %}
     </form>
   </div>
 
-  <a class="btn btn-secondary btn-sm" href="{% url 'keys' %}">Back</a>
+  <a class="btn btn-secondary btn-sm" href="{% url 'login' %}">Back</a>
   <a class="btn btn-primary btn-sm" href="{% url 'keys' %}">Next</a>
   <!-- Next page button -->
+
 </div>
+<script>
+  // Check if there is a file saved in the session storage
+  let savedFilePath = sessionStorage.getItem('savedFilePath');
+  if (savedFilePath) {
+      document.getElementById('file').value = savedFilePath;
+  }
+
+  // Add event listener to save file path to session storage when file input changes
+  document.getElementById('file').addEventListener('change', function (event) {
+      let filePath = event.target.value;
+      sessionStorage.setItem('savedFilePath', filePath);
+  });
+
+  // Add event listener to form submission to clear saved file path
+  document.getElementById('uploadForm').addEventListener('submit', function () {
+      sessionStorage.removeItem('savedFilePath');
+  });
+</script>
 {% endblock content %}
