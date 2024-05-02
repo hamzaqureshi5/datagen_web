@@ -19,7 +19,7 @@ Generator {% endblock title %} {% block content %}
           <label for="vendor text-left"> Transport Key: </label>
           <div class="transportKey d-flex">
             <input type="text" class="form-control form-control-sm" id="outputfile" name="k4_key_text" value="{{K4}}"
-              maxlength="64">
+              maxlength="64" required>
             <button type="submit" class="btn btn-dark btn-sm mx-1" id="fetch_button" name="k4_key"
               value="k4_fetch_button">
               Fetch
@@ -38,7 +38,7 @@ Generator {% endblock title %} {% block content %}
           <label for="vendor"> Operator Key: </label>
           <div class="operatorkey d-flex justify-content-evenly">
             <input type="text" class="form-control form-control-sm" id="outputfile" name="op_key_text" value="{{OP}}"
-              maxlength="32">
+              maxlength="32"  required>
             <button type="submit" class="btn btn-dark btn-sm mx-1" name="op_key" id="fetch_button"
               value="FFFFFFFFFFFFFFFFFF(FETCH)">
               Fetch
@@ -53,7 +53,7 @@ Generator {% endblock title %} {% block content %}
           <label for="vendor"> Data Size: </label>
           <div class="transportKey d-flex justify-content-evenly">
             <input type="text" class="form-control form-control-sm" id="inputfile" name="data_size_text" maxlength="6"
-              value="{{SIZE}}" pattern="[0-9]*" title="Please enter only integers" aria-describedby="" />
+              value="{{SIZE}}" pattern="[0-9]*" title="Please enter only integers" aria-describedby="" required />
             <button type="button" class="btn btn-dark btn-sm mx-1" name="data_size_auto">
               Auto
             </button>
@@ -63,7 +63,7 @@ Generator {% endblock title %} {% block content %}
           <label for="vendor"> IMSI: </label>
           <div class="transportKey d-flex justify-content-evenly">
             <input type="text" class="form-control form-control-sm" id="inputfile" name="imsi_text" maxlength="15"
-              value="{{IMSI}}" pattern="[0-9]*" title="Please enter only integers" aria-describedby="" />
+              value="{{IMSI}}" pattern="[0-9]*" title="Please enter only integers" aria-describedby=""  required/>
             <button type="button" class="btn btn-dark btn-sm mx-1" name="imsi_auto">
               Auto
             </button>
@@ -73,7 +73,7 @@ Generator {% endblock title %} {% block content %}
           <label for="vendor"> ICCID: </label>
           <div class="transportKey d-flex justify-content-evenly">
             <input type="text" class="form-control form-control-sm" id="inputfile" name="iccid_text" maxlength="20"
-              value="{{ICCID}}" pattern="[0-9]*" title="Please enter only integers" aria-describedby="" />
+              value="{{ICCID}}" pattern="[0-9]*" title="Please enter only integers" aria-describedby=""  required/>
             <button type="button" class="btn btn-dark btn-sm mx-1" name="iccid_auto">
               Auto
             </button>
@@ -85,16 +85,17 @@ Generator {% endblock title %} {% block content %}
               <label for=" "> Pin 1: </label>
               <div class="pin1 d-flex ">
                 <input type="text" class="form-control form-control-sm" id="" name="pin1_text" aria-describedby=""
-                  value="{{PIN1}}" maxlength="4" />
+                  value="{{PIN1}}" maxlength="4"  required/>
                 <button type="button" class="btn btn-dark btn-sm mx-1" name="pin1_auto">
                   Auto
                 </button>
 
                 <div class="fixedchk d-flex mt-1">
-                  <label class="form-check-label" for=""> Fixed </label>
                   <div class="form-check mx-1">
                     <input class="form-check-input" type="checkbox" id="pin1_rand_check" name="pin1_rand_check"
                       value="True" />
+                      <label class="form-check-label" for=""> Fixed </label>
+
                   </div>
                 </div>
               </div>
@@ -103,17 +104,18 @@ Generator {% endblock title %} {% block content %}
               <label for="vendor"> Pin 2: </label>
               <div class="pin1 d-flex justify-content-evenly">
                 <input type="text" class="form-control form-control-sm" id="inputfile" name="pin2_text" maxlength="4"
-                  value="{{PIN2}}" aria-describedby="" />
+                  value="{{PIN2}}" aria-describedby=""  required/>
                 <button type="button" class="btn btn-dark btn-sm mx-1" name="pin2_auto">
                   Auto
                 </button>
                 <div class="fixedchk d-flex mt-1">
-                  <label class="form-check-label" for="inlineFormCheck">
-                    Fixed
-                  </label>
                   <div class="form-check mx-1">
                     <input class="form-check-input" type="checkbox" id="pin2_rand_check" name="pin2_rand_check"
                       value="True" />
+                      <label class="form-check-label" for="inlineFormCheck">
+                        Fixed
+                      </label>
+
                   </div>
                 </div>
               </div>
@@ -122,17 +124,18 @@ Generator {% endblock title %} {% block content %}
               <label for="vendor"> Adm 1: </label>
               <div class="pin1 d-flex justify-content-evenly">
                 <input type="text" class="form-control form-control-sm" id="inputfile" name="adm1_text" maxlength="8"
-                  value="{{ADM1}}" aria-describedby="" />
+                  value="{{ADM1}}" aria-describedby=""  required/>
                 <button type="button" class="btn btn-dark btn-sm mx-1" name="adm1_auto">
                   Auto
                 </button>
                 <div class="fixedchk d-flex mt-1">
-                  <label class="form-check-label" for="inlineFormCheck">
-                    Fixed
-                  </label>
                   <div class="form-check mx-1">
                     <input class="form-check-input" type="checkbox" id="adm1_rand_check" name="adm1_rand_check"
                       value="True" />
+                      <label class="form-check-label" for="inlineFormCheck">
+                        Fixed
+                      </label>
+
                   </div>
                 </div>
               </div>
@@ -144,17 +147,18 @@ Generator {% endblock title %} {% block content %}
               <label for="vendor"> Puk 1: </label>
               <div class="pin1 d-flex justify-content-evenly">
                 <input type="text" class="form-control form-control-sm" id="inputfile" name="puk1_text" maxlength="8"
-                  value="{{PUK1}}" aria-describedby="" />
+                  value="{{PUK1}}" aria-describedby=""  required/>
                 <button type="button" class="btn btn-dark btn-sm mx-1" name="puk1_auto">
                   Auto
                 </button>
                 <div class="fixedchk d-flex mt-1">
-                  <label class="form-check-label" for="inlineFormCheck">
-                    Fixed
-                  </label>
                   <div class="form-check mx-1">
                     <input class="form-check-input" type="checkbox" id="puk1_rand_check" name="puk1_rand_check"
                       value="True" />
+                      <label class="form-check-label" for="inlineFormCheck">
+                        Fixed
+                      </label>
+
                   </div>
                 </div>
               </div>
@@ -163,17 +167,18 @@ Generator {% endblock title %} {% block content %}
               <label for="vendor"> Puk 2: </label>
               <div class="pin1 d-flex justify-content-evenly">
                 <input type="text" class="form-control form-control-sm" id="inputfile" name="puk2_text" maxlength="8"
-                  value="{{PUK2}}" aria-describedby="" />
+                  value="{{PUK2}}" aria-describedby=""  required/>
                 <button type="button" class="btn btn-dark btn-sm mx-1" name="puk2_auto">
                   Auto
                 </button>
                 <div class="fixedchk d-flex mt-1">
-                  <label class="form-check-label" for="inlineFormCheck">
-                    Fixed
-                  </label>
                   <div class="form-check mx-1">
                     <input class="form-check-input" type="checkbox" id="puk2_rand_check" name="puk2_rand_check"
                       value="True" />
+                      <label class="form-check-label" for="inlineFormCheck">
+                        Fixed
+                      </label>
+
                   </div>
                 </div>
               </div>
@@ -182,17 +187,18 @@ Generator {% endblock title %} {% block content %}
               <label for="vendor"> Adm 6: </label>
               <div class="pin1 d-flex justify-content-evenly">
                 <input type="text" class="form-control form-control-sm" id="inputfile" name="adm6_text" maxlength="8"
-                  value="{{ADM6}}" aria-describedby="" />
+                  value="{{ADM6}}" aria-describedby=""  required/>
                 <button type="button" class="btn btn-dark btn-sm mx-1" name="adm6_auto">
                   Auto
                 </button>
                 <div class="fixedchk d-flex mt-1">
-                  <label class="form-check-label" for="inlineFormCheck">
-                    Fixed
-                  </label>
                   <div class="form-check mx-1">
                     <input class="form-check-input" type="checkbox" id="adm6_rand_check" name="adm6_rand_check"
                       value="True" />
+                      <label class="form-check-label" for="inlineFormCheck">
+                        Fixed
+                      </label>
+    
                   </div>
                 </div>
               </div>
@@ -202,7 +208,7 @@ Generator {% endblock title %} {% block content %}
         </div>
       </div>
       <div class=" col-12  text-end me-5">
-        <button type="submit" class="btn btn-primary " name="submit">Submit </button>
+        <button type="submit" class="btn btn-primary " name="submit">Save </button>
       </div>
     </form>
   </div>
@@ -226,6 +232,55 @@ Generator {% endblock title %} {% block content %}
     }
   });
 </script>
+<script>
+  // Function to save checkbox state to local storage
+  function saveCheckboxState(checkboxId) {
+      var checkbox = document.getElementById(checkboxId);
+      localStorage.setItem(checkboxId + '_state', checkbox.checked);
+  }
+
+  // Function to load checkbox state from local storage
+  function loadCheckboxState(checkboxId) {
+      var checkbox = document.getElementById(checkboxId);
+      var checkboxState = localStorage.getItem(checkboxId + '_state');
+      if (checkboxState === 'true') {
+          checkbox.checked = true;
+      } else {
+          checkbox.checked = false;
+      }
+  }
+
+  // Load checkbox states when the page is loaded
+  window.onload = function() {
+      loadCheckboxState('pin1_rand_check');
+      loadCheckboxState('puk1_rand_check');
+      loadCheckboxState('pin2_rand_check');
+      loadCheckboxState('puk2_rand_check');
+      loadCheckboxState('adm1_rand_check');
+      loadCheckboxState('adm6_rand_check');
+  };
+
+  // Save checkbox states when the checkboxes are clicked
+  document.getElementById('pin1_rand_check').addEventListener('change', function() {
+      saveCheckboxState('pin1_rand_check');
+  });
+  document.getElementById('puk1_rand_check').addEventListener('change', function() {
+      saveCheckboxState('puk1_rand_check');
+  });
+  document.getElementById('pin2_rand_check').addEventListener('change', function() {
+      saveCheckboxState('pin2_rand_check');
+  });
+  document.getElementById('puk2_rand_check').addEventListener('change', function() {
+      saveCheckboxState('puk2_rand_check');
+  });
+  document.getElementById('adm1_rand_check').addEventListener('change', function() {
+      saveCheckboxState('adm1_rand_check');
+  });
+  document.getElementById('adm6_rand_check').addEventListener('change', function() {
+      saveCheckboxState('adm6_rand_check');
+  });
+</script>
+
 <!-- <script>
   document.addEventListener("DOMContentLoaded", function () {
     // Get references to the buttons, textarea, and hidden input field
