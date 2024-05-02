@@ -53,3 +53,10 @@ class GraphicalDataJson(models.Model):
     parameter = models.CharField(null=False, default="DEFAULT", max_length=10)
     lclip = models.IntegerField(null=False, default=0)
     rclip = models.IntegerField(null=False, default=32)
+
+
+class Zong_Input_Dataframe(models.Model):
+    id = models.IntegerField(primary_key=True)
+    iccid = models.CharField(null=False, default="NaN", max_length=20)
+    imsi = models.CharField(null=False, default="NaN", max_length=15)
+

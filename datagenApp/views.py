@@ -14,12 +14,12 @@ from .models import (
     EncryptionKeys,
     StartingParams,
     SecurityKeys,
-    SecurityKeysRandomization, ElectricalDataJson, GraphicalDataJson
+    SecurityKeysRandomization, ElectricalDataJson, GraphicalDataJson, Zong_Input_Dataframe
 )
 from .utils import dg_function, save_keys
-
+from app.datagen.operators.zong.FileParser import ZongFileParser
 import json
-
+import pandas as pd
 
 def user_login(request):
     if request.method == "POST":
@@ -60,6 +60,17 @@ def document(request):
         text_file.file_path = uploaded_file.name
         text_file.save()
     context = {"result": "Error loading file!"}
+
+    m_zong = ZongFileParser("N20230311111111111.txt")
+    df = pd.DataFrame()
+    df = m_zong.input_file_handle()
+    print(df)
+    del m_zong
+
+    Zong_Input_Dataframe.objects.all().delete()
+
+    instances = [Zong_Input_Dataframe(id=index , iccid =row['ICCID'],imsi=row['IMSI']) for index, row in df.iterrows() ]
+    Zong_Input_Dataframe.objects.bulk_create(instances)
 
     return render(request, "datagenApp/document.html", context)
 
