@@ -224,8 +224,8 @@ def preview_files_gets():
         k4_4="77E1385B1568CDB1D7CBD668B86606786150D233874CE188B29C46DAB127440B",
         keys=True,
     )
-    print(Initial_DataFrame)
-    print("Keys used in this data generation attempt are : ", keys_dict)
+    #    print(Initial_DataFrame)
+    #    print("Keys used in this data generation attempt are : ", keys_dict)
 
     laser_df = pd.DataFrame()
     elect_df = pd.DataFrame()
