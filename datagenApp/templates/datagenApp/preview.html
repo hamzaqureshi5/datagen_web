@@ -12,7 +12,13 @@ Data Generator
     <div
         class="left_portion col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 shadow bg-body-tertiary rounded mx-auto p-5 mb-5 mt-5">
         <h3 class="text-center">Data Preview</h3>
+        {% if data_generated %}
         {{ df_html | safe }}
+        {% else %}
+        <!-- <p class="text-danger">No data generated.</p> -->
+        <div class="alert alert-danger">No data generated.</div>
+
+        {% endif %}
     </div>
 
     <a class="btn btn-secondary btn-sm" href="{% url 'graphical' %}">Back</a>

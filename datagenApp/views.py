@@ -113,7 +113,7 @@ def graphical(request):
 def preview(request):
     print("=======PREVIEW========")
     context = {"df_html": pd.DataFrame()}
-
+    data_generated = False
     if request.method == "POST":
         elect, laser, server, keys = preview_files_gets()
         #    df = pd.read_csv("dummy.csv", encoding="latin-1")
@@ -121,12 +121,19 @@ def preview(request):
         save_df_to_db(elect, "elect")
         save_df_to_db(laser, "graph")
         save_df_to_db(server, "server")
+        data_generated = True
+
         df_html = elect.to_html()  # Convert DataFrame to HTML table
-        context = {"df_html": df_html}
+        #        context = {"df_html": df_html}
+        context = {"df_html": df_html, "data_generated": data_generated}
 
     return render(request, "datagenApp/preview.html", context=context)
 
 
 @login_required
 def generate(request):
-    return render(request, "datagenApp/generate.html")
+    context = {}
+    context["result"] = str("Select Output Folder")
+    context["success"] = False
+
+    return render(request, "datagenApp/generate.html", context)
