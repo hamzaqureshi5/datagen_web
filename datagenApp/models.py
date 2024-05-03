@@ -60,3 +60,7 @@ class Zong_Input_Dataframe(models.Model):
     id = models.IntegerField(primary_key=True)
     iccid = models.CharField(null=False, default="NaN", max_length=20)
     imsi = models.CharField(null=False, default="NaN", max_length=15)
+
+
+class ElectricalOutputData(models.Model):
+    row_value = models.CharField(max_length=512, default="NaN")

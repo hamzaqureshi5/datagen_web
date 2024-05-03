@@ -18,6 +18,7 @@ from .models import (
     ElectricalDataJson,
     GraphicalDataJson,
     Zong_Input_Dataframe,
+    ElectricalOutputData,
 )
 from .utils import (
     save_keys,
@@ -138,9 +139,21 @@ def preview(request):
         )
     print("=======ELECT========")
     print(ef_dict)
-    preview_files_gets()
+    e, l, g, k = preview_files_gets()
+    #    df = pd.read_csv("dummy.csv", encoding="latin-1")
+    df = e
+    print("----> ", df)
 
-    return render(request, "datagenApp/preview.html")
+    for index, row in df.iterrows():
+        row_data = df.iloc[index]
+        comma_separated = ",".join(row_data.astype(str))
+        record = ElectricalOutputData(row_value=comma_separated)
+        record.save()
+
+    df_html = df.to_html()  # Convert DataFrame to HTML table
+    context = {"df_html": df_html}
+
+    return render(request, "datagenApp/preview.html", context=context)
 
 
 @login_required

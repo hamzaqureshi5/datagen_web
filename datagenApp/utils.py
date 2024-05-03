@@ -156,11 +156,7 @@ from app.datagen.GlobalParams import PARAMETERS
 params = PARAMETERS.get_instance()
 
 
-def SET_ALL_DISP_PARAMS():
-    params.set_K4("111150987DE41E9F0808193003B543296D0A01D797B511AFDAEEEAC53BC61111")
-    params.set_OP("1111006F86FAD6540D86FEF24D261111")
-    params.set_IMSI(999990000000400)
-    params.set_ICCID(999900000000000400)
+def SET_ALL_DISP_PARAMS_SECURITY_KEYS():
     params.set_PIN1("0000")
     params.set_PUK1("00000000")
     params.set_PIN2("5555")
@@ -168,6 +164,11 @@ def SET_ALL_DISP_PARAMS():
     params.set_ADM1("11111111")
     params.set_ADM6("11111111")
     params.set_ACC("0111")
+
+
+def SET_ALL_DISP_PARAMS_STARTING_PARAMS():
+    params.set_IMSI(999990000000400)
+    params.set_ICCID(999900000000000400)
     params.set_DATA_SIZE(7)
 
     params.set_PRODUCTION_CHECK(True)
@@ -178,13 +179,13 @@ def SET_ALL_DISP_PARAMS():
     # self.params.set_SERVER_DICT(input_server_params)
     # self.params.set_ELECT_DICT(input_elect_params)
     # self.params.set_GRAPH_DICT(input_laser_params)
-    #  params.set_INPUT_PATH("C:/Users/hamza.qureshi/Desktop/STC_APP/improvements/dataGen-v17/input.csv")
+
+
+def SET_ALL_DISP_PARAMS_DOCUMENT():
     params.set_INPUT_PATH("templates/N2023031016844011.txt")
 
-    # ========================================#
-    # ========================================#
-    # ========================================#
 
+def SET_ALL_DISP_PARAMS_RANDOMIZATION_CHECK():
     params.set_PIN1_RAND(False)
     params.set_PUK1_RAND(True)
     params.set_PIN2_RAND(False)
@@ -194,10 +195,20 @@ def SET_ALL_DISP_PARAMS():
     params.set_ACC_RAND(False)
 
 
+def SET_ALL_DISP_PARAMS_ENCRYPTION_KEYS():
+    params.set_K4("111150987DE41E9F0808193003B543296D0A01D797B511AFDAEEEAC53BC61111")
+    params.set_OP("1111006F86FAD6540D86FEF24D261111")
+
+
 def preview_files_gets():
     Initial_DataFrame = pd.DataFrame()
     s = DataGenerationScript()
-    SET_ALL_DISP_PARAMS()
+    SET_ALL_DISP_PARAMS_DOCUMENT()
+    SET_ALL_DISP_PARAMS_ENCRYPTION_KEYS()
+    SET_ALL_DISP_PARAMS_SECURITY_KEYS()
+    SET_ALL_DISP_PARAMS_STARTING_PARAMS()
+    SET_ALL_DISP_PARAMS_RANDOMIZATION_CHECK()
+
     Initial_DataFrame, keys_dict = s.DATA_PARSER_INITIAL(
         demo_data1=True,
         default_headers2=default_headers,
@@ -206,7 +217,7 @@ def preview_files_gets():
         keys=True,
     )
     print(Initial_DataFrame)
-    print("Keys used in this data generation attempt are : ")
+    print("Keys used in this data generation attempt are : ", keys_dict)
 
     laser_df = pd.DataFrame()
     elect_df = pd.DataFrame()
