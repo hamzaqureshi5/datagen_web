@@ -378,28 +378,28 @@ class PARAMETERS(DATA_FRAMES):
         param = param1
 
         temp= param_name
-
-        match temp:
-            case "ICCID":
+        if True:
+#        match temp:
+            if temp=="ICCID":
                 result = (
                     len(str(param)) == 20
                     or len(str(param)) == 19
                     or len(str(param)) == 18
                 )
-            case "IMSI":
+            elif temp=="IMSI":
                 result = len(str(param)) == 15
-            case "PIN1" | "PIN2":
+            elif temp=="PIN1" | temp=="PIN2":
                 result = len(str(param)) == 4
-            case "PUK1" | "PUK2" | "ADM1" | "ADM6":
+            elif temp=="PUK1" | temp=="PUK2" |temp== "ADM1" | temp=="ADM6":
                 result = len(str(param)) == 8
-            case "OP":
+            elif temp=="OP":
                 result = len(str(param)) == 32
-            case "K4":
+            elif temp=="K4":
                 result = len(str(param)) == 64
-            case "SIZE":
+            elif temp=="SIZE":
                 param = int(param)
                 result = len(str(param)) != 0 or param > 0
-            case "DICT":
+            elif temp=="DICT":
                 param = dict(param)
                 result = len(param) > 0
         print(param_name, result)
