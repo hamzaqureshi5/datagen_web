@@ -109,23 +109,22 @@ def graphical(request):
 @login_required
 def preview(request):
     print("=======PREVIEW========")
-    gdict = GraphicalDataJson.get_json()
+    context = {"df_html": pd.DataFrame()}
 
-    edict = ElectricalDataJson.get_json()
+    if request.method == "POST":
+        elect, laser, graph, keys = preview_files_gets()
+        #    df = pd.read_csv("dummy.csv", encoding="latin-1")
+        df = elect
+        print("----> ", df)
 
-    e, l, g, k = preview_files_gets()
-    #    df = pd.read_csv("dummy.csv", encoding="latin-1")
-    df = e
-    print("----> ", df)
+        for index, row in df.iterrows():
+            row_data = df.iloc[index]
+            comma_separated = ",".join(row_data.astype(str))
+            record = ElectricalOutputData(row_value=comma_separated)
+            record.save()
 
-    for index, row in df.iterrows():
-        row_data = df.iloc[index]
-        comma_separated = ",".join(row_data.astype(str))
-        record = ElectricalOutputData(row_value=comma_separated)
-        record.save()
-
-    df_html = df.to_html()  # Convert DataFrame to HTML table
-    context = {"df_html": df_html}
+        df_html = df.to_html()  # Convert DataFrame to HTML table
+        context = {"df_html": df_html}
 
     return render(request, "datagenApp/preview.html", context=context)
 

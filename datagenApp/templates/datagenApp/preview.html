@@ -19,9 +19,10 @@ Data Generator
     <a class="btn btn-primary btn-sm" href="{% url 'generate' %}">Next</a>
 
     <div class="col-12 text-end me-5">
-        <button type="submit" class="btn btn-primary" name="submit">
-            Generate
-        </button>
+        <form action="#" method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary" name="submit">Generate</button>
+        </form>
     </div>
 </div>
 
