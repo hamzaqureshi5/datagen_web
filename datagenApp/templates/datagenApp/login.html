@@ -1,0 +1,52 @@
+{% extends 'datagenApp/base.html' %}
+{% load static %}
+
+{% block title %}
+login
+{% endblock title %}
+
+{% block content %}
+{% block body %}
+<!----Login Page-->
+<h2 class="text-center mt-5">Login</h2>
+<div
+    class="container mt-3 col-10 col-sm-10  col-md-10 col-lg-4 col-xl-4 py-4 shadow-sm p-3 mb-5 bg-body-tertiary rounded">
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+        <p>Don't have an Account? <a href="/signup">Create Account</a></p>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="remember_me" name="remember_me">
+            <label class="form-check-label" for="remember_me">Remember me</label>
+        </div>
+        <div class="col-12 text-end me-5">
+            <button type="submit" class="btn btn-primary" name="login">Login</button>
+        </div>
+    </form>
+    
+    <!-- Display wrong password message -->
+    {% if form.errors %}
+
+    <div class="alert alert-danger mt-3">
+        <strong>Error:</strong> Invalid username or password.
+    </div>
+    {% endif %}
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="{{ message.tags }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+<!---Login Page end-->
+{% endblock body %}
+{% endblock content %}

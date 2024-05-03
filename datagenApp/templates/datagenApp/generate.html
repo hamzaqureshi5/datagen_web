@@ -1,0 +1,47 @@
+{% extends 'datagenApp/base.html' %}
+{% load static %}
+{% block title %}
+Data Generator
+
+{% endblock title %}
+
+{% block content %}
+
+<!-- One "tab" for each step in the form: -->
+<div class="tab mt-5">
+  <div
+    class="left_portion col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 shadow bg-body-tertiary rounded mx-auto p-5 mb-5 mt-5">
+    <h3 class="text-center">Load Input File</h3>
+    {% if success %}
+    <div class="alert alert-success">{{ result }}</div>
+    <!-- Display the error message if it exists -->
+    {% else %}
+    <div class="alert alert-danger">{{ result }}</div>
+    <!-- Display a success message if no error exists -->
+    {% endif %}
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="row">
+        <!-- Input File -->
+        <div class="inputfile col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+          <fieldset>
+            <div class="custom-file d-flex">
+              <input type="file" class="form-control form-control-sm my-1" id="file" accept=".txt"
+                aria-describedby="inputGroupFileAddon04" aria-label="Upload" name="file" />
+              <button class="btn btn-dark btn-sm mx-2" type="submit" id="openFile" name="preview_in_file">
+                Open
+              </button>
+            </div>
+          </fieldset>
+        </div>
+      </div>
+
+
+    </form>
+  </div>
+
+  <a class="btn btn-secondary btn-sm" href="{% url 'preview' %}">Back</a>
+  <a class="btn btn-primary btn-sm" href="{% url 'document' %}">Next</a>
+</div>
+
+{% endblock content %}

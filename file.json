@@ -1,0 +1,74 @@
+[
+    {
+        "id": 1,
+        "variable": "ICCID",
+        "clip": "0",
+        "length": "19"
+    },
+    {
+        "id": 2,
+        "variable": "IMSI",
+        "clip": "0",
+        "length": "14"
+    },
+    {
+        "id": 3,
+        "variable": "PIN1",
+        "clip": "0",
+        "length": "3"
+    },
+    {
+        "id": 4,
+        "variable": "PUK1",
+        "clip": "0",
+        "length": "3"
+    },
+    {
+        "id": 5,
+        "variable": "PIN2",
+        "clip": "0",
+        "length": "3"
+    },
+    {
+        "id": 6,
+        "variable": "PUK2",
+        "clip": "0",
+        "length": "3"
+    },
+    {
+        "id": 7,
+        "variable": "KI",
+        "clip": "0",
+        "length": "31"
+    },
+    {
+        "id": 8,
+        "variable": "EKI",
+        "clip": "0",
+        "length": "31"
+    },
+    {
+        "id": 9,
+        "variable": "OPC",
+        "clip": "0",
+        "length": "31"
+    },
+    {
+        "id": 10,
+        "variable": "ADM1",
+        "clip": "0",
+        "length": "3"
+    },
+    {
+        "id": 11,
+        "variable": "ADM6",
+        "clip": "0",
+        "length": "3"
+    },
+    {
+        "id": 12,
+        "variable": "ACC",
+        "clip": "0",
+        "length": "3"
+    }
+]
