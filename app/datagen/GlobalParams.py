@@ -376,7 +376,10 @@ class PARAMETERS(DATA_FRAMES):
     def is_valid(param1, param_name: str):
         result = False
         param = param1
-        match param_name:
+
+        temp= param_name
+
+        match temp:
             case "ICCID":
                 result = (
                     len(str(param)) == 20
