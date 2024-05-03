@@ -17,7 +17,7 @@ This code include following :
 
 # !pip install pycryptodome
 # you can use requirements.txt
-from datagen.GlobalParams import PARAMETERS, DATA_FRAMES
+from app.datagen.GlobalParams import PARAMETERS, DATA_FRAMES
 
 # from custom_json import JsonHandler
 from typing import Optional, List, Dict, Any, Tuple
@@ -623,7 +623,7 @@ class DataGenerationScript:
         demo_data = self.__Apply_functions(demo_data_init, op_3, k4_3)
         return demo_data
 
-    def __DATA_PARSER_INITIAL(
+    def DATA_PARSER_INITIAL(
         self, demo_data1: bool, default_headers2: list, op_4, k4_4, keys: bool
     ):
         if keys:
@@ -636,7 +636,7 @@ class DataGenerationScript:
         if demo_data1 is False:
             return self.__non_demo(default_headers2, op_4, k4_4), dict_keys
 
-    def __DATA_PARSER_FINAL(
+    def DATA_PARSER_FINAL(
         self, input_dict: dict, df_input, clip: bool, encoding: bool, caption: str
     ):
         (
@@ -766,7 +766,7 @@ class DataGenerationScript:
 
     def _preview_files_gets(self):
         Initial_DataFrame = pd.DataFrame()
-        Initial_DataFrame, keys_dict = self.__DATA_PARSER_INITIAL(
+        Initial_DataFrame, keys_dict = self.DATA_PARSER_INITIAL(
             demo_data1=self.params.get_PRODUCTION_CHECK(),
             default_headers2=default_headers,
             op_4=self.params.get_OP(),
@@ -781,7 +781,7 @@ class DataGenerationScript:
         server_df = pd.DataFrame()
 
         if self.params.get_SERVER_CHECK() is True:
-            server_df = self.__DATA_PARSER_FINAL(
+            server_df = self.DATA_PARSER_FINAL(
                 self.params.get_SERVER_DICT(),
                 Initial_DataFrame,
                 clip=False,
@@ -789,7 +789,7 @@ class DataGenerationScript:
                 caption="SERVER",
             )
         if self.params.get_GRAPH_CHECK() is True:
-            laser_df = self.__DATA_PARSER_FINAL(
+            laser_df = self.DATA_PARSER_FINAL(
                 self.params.get_GRAPH_DICT(),
                 Initial_DataFrame,
                 clip=True,
@@ -797,7 +797,7 @@ class DataGenerationScript:
                 caption="LASER",
             )
         if self.params.get_ELECT_CHECK() is True:
-            elect_df = self.__DATA_PARSER_FINAL(
+            elect_df = self.DATA_PARSER_FINAL(
                 self.params.get_ELECT_DICT(),
                 Initial_DataFrame,
                 clip=False,

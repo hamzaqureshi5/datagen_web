@@ -14,10 +14,21 @@ from .models import (
     EncryptionKeys,
     StartingParams,
     SecurityKeys,
-    SecurityKeysRandomization, ElectricalDataJson, GraphicalDataJson, Zong_Input_Dataframe
+    SecurityKeysRandomization,
+    ElectricalDataJson,
+    GraphicalDataJson,
+    Zong_Input_Dataframe,
 )
-from .utils import save_keys, save_electrical_data, save_graphical_data, save_uploaded_file
+from .utils import (
+    save_keys,
+    save_electrical_data,
+    save_graphical_data,
+    save_uploaded_file,
+    preview_files_gets,
+)
 import json
+from app.datagen.STCAppScriptV6 import *
+
 
 def user_login(request):
     if request.method == "POST":
@@ -35,9 +46,7 @@ def user_login(request):
             return redirect("document")
         else:
             messages.error(request, "Invalid username or password.")
-            return redirect(
-                "login"
-            ) 
+            return redirect("login")
 
     return render(request, "datagenApp/login.html")
 
@@ -63,19 +72,22 @@ def document(request):
 
     return render(request, "datagenApp/document.html", context)
 
+
 @csrf_exempt
 def save_electrical(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         data = json.loads(request.body)
         return save_electrical_data(data)
     return JsonResponse({"status": "error", "message": "Invalid request"}, status=400)
 
+
 @csrf_exempt
 def save_graphical(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         data = json.loads(request.body)
         return save_graphical_data(data)
     return JsonResponse({"status": "error", "message": "Invalid request"}, status=400)
+
 
 @login_required
 def keys(request):
@@ -95,6 +107,39 @@ def graphical(request):
 
 @login_required
 def preview(request):
+    print("=======PREVIEW========")
+    gdict = GraphicalDataJson.objects.all()
+    gf_dict = {}
+    for grecord in gdict:
+        gf_dict.update(
+            {
+                str(grecord.id): [
+                    str(grecord.parameter),
+                    str(grecord.lclip),
+                    str(grecord.rclip),
+                ]
+            }
+        )
+    print("=======GRAPH========")
+
+    print(gf_dict)
+
+    edict = ElectricalDataJson.objects.all()
+    ef_dict = {}
+    for erecord in edict:
+        ef_dict.update(
+            {
+                str(erecord.id): [
+                    str(erecord.parameter),
+                    str(erecord.lclip),
+                    str(erecord.rclip),
+                ]
+            }
+        )
+    print("=======ELECT========")
+    print(ef_dict)
+    preview_files_gets()
+
     return render(request, "datagenApp/preview.html")
 
 

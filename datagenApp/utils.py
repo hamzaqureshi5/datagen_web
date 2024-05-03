@@ -3,15 +3,22 @@ import requests
 import json
 from django.http import JsonResponse
 from app.datagen.operators.zong.FileParser import ZongFileParser
-from .models import (SecurityKeys,SecurityKeysRandomization, EncryptionKeys,StartingParams,TextFile, Zong_Input_Dataframe, ElectricalDataJson, GraphicalDataJson)
-
+from .models import (
+    SecurityKeys,
+    SecurityKeysRandomization,
+    EncryptionKeys,
+    StartingParams,
+    TextFile,
+    Zong_Input_Dataframe,
+    ElectricalDataJson,
+    GraphicalDataJson,
+)
 
 
 def read_json(file_path: str):
     with open(file_path, "r") as json_file:
         data = json.load(json_file)
     return dict(data)
-
 
 
 def save_uploaded_file(uploaded_file):
@@ -25,22 +32,39 @@ def save_uploaded_file(uploaded_file):
 
     Zong_Input_Dataframe.objects.all().delete()
 
-    instances = [Zong_Input_Dataframe(id=index, iccid=row['ICCID'], imsi=row['IMSI']) for index, row in df.iterrows()]
+    instances = [
+        Zong_Input_Dataframe(id=index, iccid=row["ICCID"], imsi=row["IMSI"])
+        for index, row in df.iterrows()
+    ]
     Zong_Input_Dataframe.objects.bulk_create(instances)
+
 
 def save_electrical_data(data):
     ElectricalDataJson.objects.all().delete()
     data_objects = [
-        ElectricalDataJson(id=item['id'], parameter=item['parameter'], lclip=item['lclip'], rclip=item['rclip']) for
-        item in data]
+        ElectricalDataJson(
+            id=item["id"],
+            parameter=item["parameter"],
+            lclip=item["lclip"],
+            rclip=item["rclip"],
+        )
+        for item in data
+    ]
     ElectricalDataJson.objects.bulk_create(data_objects)
     return JsonResponse({"status": "success", "message": "Data saved successfully."})
+
 
 def save_graphical_data(data):
     GraphicalDataJson.objects.all().delete()
     data_objects = [
-        GraphicalDataJson(id=item['id'], parameter=item['parameter'], lclip=item['lclip'], rclip=item['rclip']) for
-        item in data]
+        GraphicalDataJson(
+            id=item["id"],
+            parameter=item["parameter"],
+            lclip=item["lclip"],
+            rclip=item["rclip"],
+        )
+        for item in data
+    ]
     GraphicalDataJson.objects.bulk_create(data_objects)
     return JsonResponse({"status": "success", "message": "Data saved successfully."})
 
@@ -109,10 +133,107 @@ def save_keys(request):
     }
 
 
-# def api_call():
-#     url = "http://127.0.0.1:5551/dg1"
-#     response = requests.post(
-#         url,
-#     )
-#     data = response.json()
-#     return data
+default_headers = (
+    "ICCID",
+    "IMSI",
+    "PIN1",
+    "PUK1",
+    "PIN2",
+    "PUK2",
+    "KI",
+    "EKI",
+    "OPC",
+    "ADM1",
+    "ADM6",
+    "ACC",
+)
+
+
+import pandas as pd
+from app.datagen.STCAppScriptV6 import *
+from app.datagen.GlobalParams import PARAMETERS
+
+params = PARAMETERS.get_instance()
+
+
+def SET_ALL_DISP_PARAMS():
+    params.set_K4("111150987DE41E9F0808193003B543296D0A01D797B511AFDAEEEAC53BC61111")
+    params.set_OP("1111006F86FAD6540D86FEF24D261111")
+    params.set_IMSI(999990000000400)
+    params.set_ICCID(999900000000000400)
+    params.set_PIN1("0000")
+    params.set_PUK1("00000000")
+    params.set_PIN2("5555")
+    params.set_PUK2("4444")
+    params.set_ADM1("11111111")
+    params.set_ADM6("11111111")
+    params.set_ACC("0111")
+    params.set_DATA_SIZE(7)
+
+    params.set_PRODUCTION_CHECK(True)
+    params.set_ELECT_CHECK(True)
+    params.set_GRAPH_CHECK(True)
+    params.set_SERVER_CHECK(True)
+
+    # self.params.set_SERVER_DICT(input_server_params)
+    # self.params.set_ELECT_DICT(input_elect_params)
+    # self.params.set_GRAPH_DICT(input_laser_params)
+    #  params.set_INPUT_PATH("C:/Users/hamza.qureshi/Desktop/STC_APP/improvements/dataGen-v17/input.csv")
+    params.set_INPUT_PATH("templates/N2023031016844011.txt")
+
+    # ========================================#
+    # ========================================#
+    # ========================================#
+
+    params.set_PIN1_RAND(False)
+    params.set_PUK1_RAND(True)
+    params.set_PIN2_RAND(False)
+    params.set_PUK2_RAND(False)
+    params.set_ADM1_RAND(False)
+    params.set_ADM6_RAND(True)
+    params.set_ACC_RAND(False)
+
+
+def preview_files_gets():
+    Initial_DataFrame = pd.DataFrame()
+    s = DataGenerationScript()
+    SET_ALL_DISP_PARAMS()
+    Initial_DataFrame, keys_dict = s.DATA_PARSER_INITIAL(
+        demo_data1=True,
+        default_headers2=default_headers,
+        op_4="7B980530B5F04285DB3D9AA678FADFEE",
+        k4_4="77E1385B1568CDB1D7CBD668B86606786150D233874CE188B29C46DAB127440B",
+        keys=True,
+    )
+    print(Initial_DataFrame)
+    print("Keys used in this data generation attempt are : ")
+
+    laser_df = pd.DataFrame()
+    elect_df = pd.DataFrame()
+    server_df = pd.DataFrame()
+    if params.get_SERVER_CHECK() is True:
+        server_df = s.DATA_PARSER_FINAL(
+            params.get_SERVER_DICT(),
+            Initial_DataFrame,
+            clip=False,
+            encoding=False,
+            caption="SERVER",
+        )
+    if params.get_GRAPH_CHECK() is True:
+        laser_df = s.DATA_PARSER_FINAL(
+            params.get_GRAPH_DICT(),
+            Initial_DataFrame,
+            clip=True,
+            encoding=False,
+            caption="LASER",
+        )
+    if params.get_ELECT_CHECK() is True:
+        elect_df = s.DATA_PARSER_FINAL(
+            params.get_ELECT_DICT(),
+            Initial_DataFrame,
+            clip=False,
+            encoding=True,
+            caption="ELECT",
+        )
+
+    return elect_df, laser_df, server_df, keys_dict
