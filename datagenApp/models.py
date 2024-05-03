@@ -42,11 +42,40 @@ class SecurityKeysRandomization(models.Model):
     adm6_rand = models.BooleanField(null=False, default=False)
 
 
+from django.core.serializers import serialize
+
+
 class ElectricalDataJson(models.Model):
     id = models.IntegerField(null=False, primary_key=True)
     parameter = models.CharField(null=False, default="DEFAULT", max_length=10)
     lclip = models.IntegerField(null=False, default=0)
     rclip = models.IntegerField(null=False, default=32)
+
+    @classmethod
+    def get_json(cls):
+        gdict = ElectricalDataJson.objects.all()
+        gf_dict = {}
+        for grecord in gdict:
+            gf_dict.update(
+                {
+                    str(grecord.id): [
+                        str(grecord.parameter),
+                        str(grecord.lclip),
+                        str(grecord.rclip),
+                    ]
+                }
+            )
+        print("=======GRAPH========")
+
+        print(gf_dict)
+        return gf_dict
+
+        # # Fetch all records from the database
+        # data = cls.objects.all()
+        # # Serialize the data to JSON format
+        # json_data = data
+        # #        json_data = serialize("json", data)
+        # return json_data
 
 
 class GraphicalDataJson(models.Model):
@@ -54,6 +83,25 @@ class GraphicalDataJson(models.Model):
     parameter = models.CharField(null=False, default="DEFAULT", max_length=10)
     lclip = models.IntegerField(null=False, default=0)
     rclip = models.IntegerField(null=False, default=32)
+
+    @classmethod
+    def get_json(cls):
+        gdict = GraphicalDataJson.objects.all()
+        gf_dict = {}
+        for grecord in gdict:
+            gf_dict.update(
+                {
+                    str(grecord.id): [
+                        str(grecord.parameter),
+                        str(grecord.lclip),
+                        str(grecord.rclip),
+                    ]
+                }
+            )
+        print("=======GRAPH========")
+
+        print(gf_dict)
+        return gf_dict
 
 
 class Zong_Input_Dataframe(models.Model):

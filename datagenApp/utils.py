@@ -176,9 +176,14 @@ def SET_ALL_DISP_PARAMS_STARTING_PARAMS():
     params.set_GRAPH_CHECK(True)
     params.set_SERVER_CHECK(True)
 
-    # self.params.set_SERVER_DICT(input_server_params)
-    # self.params.set_ELECT_DICT(input_elect_params)
-    # self.params.set_GRAPH_DICT(input_laser_params)
+
+def SET_ALL_DISP_PARAMS_DICT():
+    gdict = GraphicalDataJson.get_json()
+    edict = ElectricalDataJson.get_json()
+
+    params.set_SERVER_DICT(edict)
+    params.set_ELECT_DICT(edict)
+    params.set_GRAPH_DICT(gdict)
 
 
 def SET_ALL_DISP_PARAMS_DOCUMENT():
@@ -208,7 +213,7 @@ def preview_files_gets():
     SET_ALL_DISP_PARAMS_SECURITY_KEYS()
     SET_ALL_DISP_PARAMS_STARTING_PARAMS()
     SET_ALL_DISP_PARAMS_RANDOMIZATION_CHECK()
-
+    SET_ALL_DISP_PARAMS_DICT()
     Initial_DataFrame, keys_dict = s.DATA_PARSER_INITIAL(
         demo_data1=True,
         default_headers2=default_headers,

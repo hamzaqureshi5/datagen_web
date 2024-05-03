@@ -109,36 +109,10 @@ def graphical(request):
 @login_required
 def preview(request):
     print("=======PREVIEW========")
-    gdict = GraphicalDataJson.objects.all()
-    gf_dict = {}
-    for grecord in gdict:
-        gf_dict.update(
-            {
-                str(grecord.id): [
-                    str(grecord.parameter),
-                    str(grecord.lclip),
-                    str(grecord.rclip),
-                ]
-            }
-        )
-    print("=======GRAPH========")
+    gdict = GraphicalDataJson.get_json()
 
-    print(gf_dict)
+    edict = ElectricalDataJson.get_json()
 
-    edict = ElectricalDataJson.objects.all()
-    ef_dict = {}
-    for erecord in edict:
-        ef_dict.update(
-            {
-                str(erecord.id): [
-                    str(erecord.parameter),
-                    str(erecord.lclip),
-                    str(erecord.rclip),
-                ]
-            }
-        )
-    print("=======ELECT========")
-    print(ef_dict)
     e, l, g, k = preview_files_gets()
     #    df = pd.read_csv("dummy.csv", encoding="latin-1")
     df = e
