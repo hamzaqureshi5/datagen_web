@@ -1,9 +1,11 @@
 from django.db import models
+from django.core.serializers import serialize
 
 # Create your models here.
 
-
+import uuid
 class TextFile(models.Model):
+    file_id= models.AutoField(primary_key=True,  auto_created=True)
     file = models.FileField(upload_to="text_files/")
 
     def __str__(self):
@@ -11,6 +13,7 @@ class TextFile(models.Model):
 
 
 class StartingParams(models.Model):
+    file = models.ForeignKey(TextFile, on_delete=models.CASCADE, auto_created=True, null=True)
     size = models.CharField(max_length=5, null=False, default="FFFFFFFFFFFFFFFFFFFFF")
     iccid = models.CharField(max_length=20, null=False, default="222222222222222222222")
     imsi = models.CharField(max_length=15, null=False, default="1111111111111111")
@@ -20,11 +23,13 @@ class StartingParams(models.Model):
 
 
 class EncryptionKeys(models.Model):
+    file = models.ForeignKey(TextFile, on_delete=models.CASCADE, auto_created=True, null=True)
     k4 = models.CharField(max_length=64, null=False, default="FFFFFFFFFFFFFFFFFFFFF")
     op = models.CharField(max_length=64, null=False, default="FFFFFFFFFFFFFFFFFFFFF")
 
 
 class SecurityKeys(models.Model):
+#    file = models.ForeignKey(TextFile, on_delete=models.CASCADE, auto_created=True,null=True)
     pin1 = models.CharField(max_length=8, null=False, default="1234FFFF")
     puk1 = models.CharField(max_length=8, null=False, default="1234FFFF")
     pin2 = models.CharField(max_length=8, null=False, default="1234FFFF")
@@ -34,6 +39,7 @@ class SecurityKeys(models.Model):
 
 
 class SecurityKeysRandomization(models.Model):
+#    file = models.ForeignKey(TextFile, on_delete=models.CASCADE, default=1)
     pin1_rand = models.BooleanField(null=False, default=False)
     puk1_rand = models.BooleanField(null=False, default=False)
     pin2_rand = models.BooleanField(null=False, default=False)
@@ -42,7 +48,6 @@ class SecurityKeysRandomization(models.Model):
     adm6_rand = models.BooleanField(null=False, default=False)
 
 
-from django.core.serializers import serialize
 
 
 class ElectricalDataJson(models.Model):
