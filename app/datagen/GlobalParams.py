@@ -407,8 +407,10 @@ class PARAMETERS(DATA_FRAMES):
 
     @staticmethod
     def is_valid_df(param, param_name: str) -> bool:
-        match param_name:
-            case "DF":
+#        match param_name:
+
+            #case "DF":
+            if param_name=="DF":
                 df = pd.DataFrame(param)
                 return df.empty
 
