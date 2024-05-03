@@ -123,7 +123,7 @@ def preview(request):
         save_df_to_db(server, "server")
         data_generated = True
 
-        df_html = elect.to_html(col_space='170px')  # Convert DataFrame to HTML table
+        df_html = elect.to_html(col_space='170px',border=0)  # Convert DataFrame to HTML table
         #        context = {"df_html": df_html}
         context = {"df_html": df_html, "data_generated": data_generated}
 

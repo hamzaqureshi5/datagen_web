@@ -40,6 +40,9 @@
   /* Hide all steps by default: */
   .tab {
     display: block;
+    position: relative;
+    text-align: center;
+    margin: auto;
   }
   
   button {
@@ -134,11 +137,6 @@ button:focus {
 /* Base Start End */
 
 
-.tab {
-  position: relative;
-  text-align: center;
-  margin: auto;
-}
 
 .btn-color{
   background-color: #0e1c36;

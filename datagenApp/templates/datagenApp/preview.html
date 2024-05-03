@@ -10,10 +10,10 @@ Data Generator
 <!-- One "tab" for each step in the form: -->
 <div class="tab mt-5 " >
     <div
-        class="left_portion col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 shadow bg-body-tertiary rounded mx-auto p-5 mb-5 mt-5" style="height: 600px;width: 1800px;">
+        class="left_portion col-12 col-sm-12 col-md-12 col-lg-11 col-xl-11 shadow bg-body-tertiary rounded mx-auto px-5 py-3 mb-5 mt-5" >
         <h3 class="text-center">Data Preview</h3>
         {% if data_generated %}
-        <div class="data " style=" overflow-x: scroll; border: none; ">
+        <div class="data " style=" overflow-x: scroll; border: none; height:650px">
             {{ df_html | safe }}
         </div>
         
@@ -22,7 +22,7 @@ Data Generator
         <div class="alert alert-danger">No data generated.</div>
 
         {% endif %}
-        <div class="col-12 text-end me-5 text-center ">
+        <div class="col-12 text-end  text-center mt-2">
             <form action="#" method="post">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-primary " name="submit">Generate</button>
