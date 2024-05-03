@@ -8,28 +8,32 @@ Data Generator
 {% block content %}
 
 <!-- One "tab" for each step in the form: -->
-<div class="tab mt-5">
+<div class="tab mt-5 " >
     <div
-        class="left_portion col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 shadow bg-body-tertiary rounded mx-auto p-5 mb-5 mt-5">
+        class="left_portion col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 shadow bg-body-tertiary rounded mx-auto p-5 mb-5 mt-5" style="height: 600px;width: 1800px;">
         <h3 class="text-center">Data Preview</h3>
         {% if data_generated %}
-        {{ df_html | safe }}
+        <div class="data " style=" overflow-x: scroll; border: none; ">
+            {{ df_html | safe }}
+        </div>
+        
         {% else %}
         <!-- <p class="text-danger">No data generated.</p> -->
         <div class="alert alert-danger">No data generated.</div>
 
         {% endif %}
+        <div class="col-12 text-end me-5 text-center ">
+            <form action="#" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary " name="submit">Generate</button>
+            </form>
+        </div>
     </div>
 
     <a class="btn btn-secondary btn-sm" href="{% url 'graphical' %}">Back</a>
     <a class="btn btn-primary btn-sm" href="{% url 'generate' %}">Next</a>
 
-    <div class="col-12 text-end me-5">
-        <form action="#" method="post">
-            {% csrf_token %}
-            <button type="submit" class="btn btn-primary" name="submit">Generate</button>
-        </form>
-    </div>
+    
 </div>
 
 {% endblock content %}
