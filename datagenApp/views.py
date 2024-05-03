@@ -19,6 +19,8 @@ from .models import (
     GraphicalDataJson,
     Zong_Input_Dataframe,
     ElectricalOutputData,
+    GraphicalOutputData,
+    ServerOutputData,
 )
 from .utils import (
     save_keys,
@@ -26,6 +28,7 @@ from .utils import (
     save_graphical_data,
     save_uploaded_file,
     preview_files_gets,
+    save_df_to_db,
 )
 import json
 from app.datagen.STCAppScriptV6 import *
@@ -112,18 +115,13 @@ def preview(request):
     context = {"df_html": pd.DataFrame()}
 
     if request.method == "POST":
-        elect, laser, graph, keys = preview_files_gets()
+        elect, laser, server, keys = preview_files_gets()
         #    df = pd.read_csv("dummy.csv", encoding="latin-1")
-        df = elect
-        print("----> ", df)
 
-        for index, row in df.iterrows():
-            row_data = df.iloc[index]
-            comma_separated = ",".join(row_data.astype(str))
-            record = ElectricalOutputData(row_value=comma_separated)
-            record.save()
-
-        df_html = df.to_html()  # Convert DataFrame to HTML table
+        save_df_to_db(elect, "elect")
+        save_df_to_db(laser, "graph")
+        save_df_to_db(server, "server")
+        df_html = elect.to_html()  # Convert DataFrame to HTML table
         context = {"df_html": df_html}
 
     return render(request, "datagenApp/preview.html", context=context)

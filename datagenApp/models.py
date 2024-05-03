@@ -111,4 +111,12 @@ class Zong_Input_Dataframe(models.Model):
 
 
 class ElectricalOutputData(models.Model):
-    row_value = models.CharField(max_length=512, default="NaN")
+    row_value = models.CharField(max_length=1024, default="NaN")
+
+
+class GraphicalOutputData(models.Model):
+    row_value = models.CharField(max_length=1024, default="NaN")
+
+
+class ServerOutputData(models.Model):
+    row_value = models.CharField(max_length=1024, default="NaN")

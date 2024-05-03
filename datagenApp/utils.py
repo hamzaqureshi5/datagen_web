@@ -12,6 +12,9 @@ from .models import (
     Zong_Input_Dataframe,
     ElectricalDataJson,
     GraphicalDataJson,
+    ElectricalOutputData,
+    GraphicalOutputData,
+    ServerOutputData,
 )
 
 
@@ -253,3 +256,24 @@ def preview_files_gets():
         )
 
     return elect_df, laser_df, server_df, keys_dict
+
+
+def save_df_to_db(df, category: str):
+    if category == "elect":
+        for index, row in df.iterrows():
+            row_data = df.iloc[index]
+            comma_separated = ",".join(row_data.astype(str))
+            record = ElectricalOutputData(row_value=comma_separated)
+            record.save()
+    if category == "graph":
+        for index, row in df.iterrows():
+            row_data = df.iloc[index]
+            comma_separated = ",".join(row_data.astype(str))
+            record = GraphicalOutputData(row_value=comma_separated)
+            record.save()
+    if category == "server":
+        for index, row in df.iterrows():
+            row_data = df.iloc[index]
+            comma_separated = ",".join(row_data.astype(str))
+            record = ServerOutputData(row_value=comma_separated)
+            record.save()
