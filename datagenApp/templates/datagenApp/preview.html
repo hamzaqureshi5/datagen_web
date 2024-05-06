@@ -4,7 +4,14 @@
 Data Generator
 
 {% endblock title %}
-
+<style>
+    tbody{
+    /* display:block;  */
+    height:500px;
+    overflow-y:visible !important;
+  }
+</style>
+  
 {% block content %}
 
 <!-- One "tab" for each step in the form: -->
@@ -13,10 +20,10 @@ Data Generator
         class="left_portion col-12 col-sm-12 col-md-12 col-lg-11 col-xl-11 shadow bg-body-tertiary rounded mx-auto px-5 py-3 mb-5 mt-5">
         <h3 class="text-center">Data Preview</h3>
         {% if data_generated %}
-        <div class="data" style="overflow-x: scroll; border: none; height: 650px">
-            <table class="table table-bordered table-align">
+        <div class="data preview_table" style="overflow-x: scroll;overflow-y: scroll;  height:650px">
+            
                 {{ df_html | safe }}
-            </table>
+          
         </div>
 
         {% else %}

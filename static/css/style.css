@@ -85,7 +85,16 @@
   }
   tbody {
     display:block; 
-    height:190px;
+    /* height:190px; */
+    height: 30vh;
+    /* overflow-y:scroll; */
+}
+   #e_tableWidget {
+
+    overflow-y:scroll;
+}
+   #g_tableWidget {
+
     overflow-y:scroll;
 }
 tr {
@@ -94,15 +103,10 @@ tr {
 th, td {
     width:250px;
 }
-.table_height{
-    display:block; 
+/* .table_height{
     height: 70vh;
-    overflow-y:scroll;
-}
-
-
-
-
+    overflow-y:visible;
+} */
 
 
 /* Base Css start*/

@@ -125,7 +125,7 @@ def preview(request):
 
         #        df_html = elect.to_html(col_space='170px',border=0)  # Convert DataFrame to HTML table
         df_html = elect.to_html(
-            col_space="170px", border=0, classes="table table-bordered"
+            col_space="170px", border=0,classes="table table-striped"
         )
         #        context = {"df_html": df_html}
         context = {"df_html": df_html, "data_generated": data_generated}
