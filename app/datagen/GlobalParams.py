@@ -376,27 +376,30 @@ class PARAMETERS(DATA_FRAMES):
     def is_valid(param1, param_name: str):
         result = False
         param = param1
-        match param_name:
-            case "ICCID":
+
+        temp= param_name
+        if True:
+#        match temp:
+            if temp=="ICCID":
                 result = (
                     len(str(param)) == 20
                     or len(str(param)) == 19
                     or len(str(param)) == 18
                 )
-            case "IMSI":
+            elif temp=="IMSI":
                 result = len(str(param)) == 15
-            case "PIN1" | "PIN2":
+            elif temp=="PIN1" | temp=="PIN2":
                 result = len(str(param)) == 4
-            case "PUK1" | "PUK2" | "ADM1" | "ADM6":
+            elif temp=="PUK1" | temp=="PUK2" |temp== "ADM1" | temp=="ADM6":
                 result = len(str(param)) == 8
-            case "OP":
+            elif temp=="OP":
                 result = len(str(param)) == 32
-            case "K4":
+            elif temp=="K4":
                 result = len(str(param)) == 64
-            case "SIZE":
+            elif temp=="SIZE":
                 param = int(param)
                 result = len(str(param)) != 0 or param > 0
-            case "DICT":
+            elif temp=="DICT":
                 param = dict(param)
                 result = len(param) > 0
         print(param_name, result)
@@ -404,8 +407,10 @@ class PARAMETERS(DATA_FRAMES):
 
     @staticmethod
     def is_valid_df(param, param_name: str) -> bool:
-        match param_name:
-            case "DF":
+#        match param_name:
+
+            #case "DF":
+            if param_name=="DF":
                 df = pd.DataFrame(param)
                 return df.empty
 

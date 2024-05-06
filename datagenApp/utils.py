@@ -25,7 +25,7 @@ def read_json(file_path: str):
 
 
 def save_uploaded_file(uploaded_file):
-    obj = TextFile.objects.all().delete()
+#    obj = TextFile.objects.all().delete()
     obj = TextFile.objects.create(file=uploaded_file.name)
     obj.save()
 
