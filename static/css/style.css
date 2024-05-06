@@ -85,16 +85,17 @@
   }
   tbody {
     display:block; 
+    
     /* height:190px; */
-    height: 30vh;
+    
     /* overflow-y:scroll; */
 }
    #e_tableWidget {
-
+    height: 40vh;
     overflow-y:scroll;
 }
    #g_tableWidget {
-
+    height: 40vh;
     overflow-y:scroll;
 }
 tr {
@@ -107,7 +108,9 @@ th, td {
     height: 70vh;
     overflow-y:visible;
 } */
-
+.data_portion{
+height: 650px;
+}
 
 /* Base Css start*/
 button:focus {

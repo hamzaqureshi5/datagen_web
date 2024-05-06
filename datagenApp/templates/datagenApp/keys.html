@@ -4,7 +4,7 @@ Generator {% endblock title %} {% block content %}
 <!-- One "tab" for each step in the form: -->
 <div class="tab mt-5">
   <div
-    class="left_portion col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 shadow bg-body-tertiary rounded mx-auto p-5 mb-5 mt-5 text-left">
+    class="left_portion col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 shadow bg-body-tertiary rounded mx-auto px-5 py-4 my-5 text-left">
     <form method="post" action="#">
       {% csrf_token %}
       <div class="row">
@@ -204,16 +204,16 @@ Generator {% endblock title %} {% block content %}
         </div>
       </div>
       <!-- <div class="col-12 text-end me-5"> -->
-      <div class="col-12 text-end  text-center mt-2">
-        <button type="submit" class="btn btn-primary" name="submit">
+      <div class="col-12 text-end  text-center mt-4">
+        <button type="submit" class="btn btn-primary px-4" name="submit">
           Save
         </button>
       </div>
     </form>
   </div>
 
-  <a class="btn btn-secondary btn-sm" href="{% url 'document' %}">Back</a>
-  <a class="btn btn-primary btn-sm" href="{% url 'electrical' %}">Next</a>
+  <a class="btn btn-secondary " href="{% url 'document' %}">Back</a>
+  <a class="btn btn-primary" href="{% url 'electrical' %}">Next</a>
 </div>
 <script>
   // Get the checkbox element
