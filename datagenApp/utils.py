@@ -172,7 +172,7 @@ def SET_ALL_DISP_PARAMS_SECURITY_KEYS():
 def SET_ALL_DISP_PARAMS_STARTING_PARAMS():
     params.set_IMSI(999990000000400)
     params.set_ICCID(999900000000000400)
-    params.set_DATA_SIZE(7)
+    params.set_DATA_SIZE(15)
 
     params.set_PRODUCTION_CHECK(True)
     params.set_ELECT_CHECK(True)
