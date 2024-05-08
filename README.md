@@ -12,13 +12,13 @@ Django App Name is a web application developed using Django, a high-level Python
 1. Clone the repository to your local machine:
 
     ```bash
-    git clone https://github.com/your_username/django-app-name.git
+    git clone https://github.com/hamzaqureshi5/datagen_web.git
     ```
 
 2. Navigate into the project directory:
 
     ```bash
-    cd django-app-name
+    cd datagen_web
     ```
 
 3. Install the required dependencies:
@@ -41,11 +41,8 @@ Django App Name is a web application developed using Django, a high-level Python
 
 6. Open your web browser and navigate to `http://localhost:8000` to view the app.
 
-## Usage
 
-[Explain how to use your app, including any setup/configuration steps if necessary.]
-
-## Contributing
+<!-- ## Contributing
 
 Contributions are welcome! Please follow these steps:
 
@@ -54,13 +51,13 @@ Contributions are welcome! Please follow these steps:
 3. Make your changes.
 4. Commit your changes (`git commit -am 'Add some feature'`).
 5. Push to the branch (`git push origin feature/your-feature`).
-6. Create a new Pull Request.
+6. Create a new Pull Request. -->
 
-## License
-
-
-## Acknowledgements
+<!-- ## License -->
 
 
-## Contact
+<!-- ## Acknowledgements -->
+
+
+<!-- ## Contact -->
 
